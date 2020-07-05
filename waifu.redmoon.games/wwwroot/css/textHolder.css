@@ -1,0 +1,31 @@
+﻿.textHolder {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+    .textHolder--medium .textHolder__description {
+        font-weight: 300;
+        font-size: 1.2em;
+    }
+
+    .textHolder--medium .textHolder__content {
+        font-weight: 900;
+        font-size: 1.7em;
+    }
+    .textHolder--small .textHolder__description {
+        font-weight: 300;
+        font-size: 1em;
+    }
+
+    .textHolder--small .textHolder__content {
+        font-weight: 700;
+        font-size: 1.4em;
+    }
+
+.textHolder__description {
+    font-size: 1em;
+}
+
+.textHolder__content {
+    font-size: 1.2em;
+}

@@ -1,0 +1,94 @@
+﻿
+.clicker__tap {
+    background-color: aliceblue;
+}
+    .clicker__tap button {
+        width: 100%;
+        height: 500px;
+        background-color: rgba(255, 255, 255, 0.00);
+        border: none;
+        outline: none;
+    }
+        .clicker__tap button:hover {
+            background-color: rgba(0, 0, 0, 0.30);
+        }
+        .clicker__tap button:active {
+            background-color: rgba(0, 0, 0, 0.40);
+        }
+    .clicker__tap img {
+        width: 100%;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+    }
+    .clicker__tap p {
+        width: 100%;
+        position: absolute;
+        font-size: 3em;
+        color: #497ebf;
+    }
+
+.clicker {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+.clicker__stats {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 25px;
+}
+
+.updates {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.updates__list {
+}
+
+.updates__item {
+    
+    width: 100%;
+    background-color: none;
+    margin-top: 10px;
+}
+    .updates__item:hover {
+        background-color: rgba(0, 0, 0, 0.25);
+    }
+    .updates__item:active {
+        background-color: rgba(0, 0, 0, 0.35);
+    }
+
+.updates__itemContent:hover {
+    background-color: rgba(0, 0, 0, 0.0);
+}
+
+.updates__itemContent {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: none;
+}
+    .updates__itemContent img {
+        width: 64px;
+    }
+
+.updates__megaUpdate {
+    width: 100%;
+    padding: 20px 0;
+    position: absolute;
+    bottom: 0px;
+    background-color: #497ebf;
+    color: white;
+    text-align: center;
+    font-size: 2em;
+}
+    .updates__megaUpdate:hover {
+        background-color: #17519A;
+    }
+    .updates__megaUpdate:active {
+        background-color: #497ebf;
+    }

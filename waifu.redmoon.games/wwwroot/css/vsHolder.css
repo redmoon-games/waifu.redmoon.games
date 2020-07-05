@@ -1,0 +1,15 @@
+﻿.vsHolder {
+    height: 45px;
+    width: 100%;
+    background-color: #FBB473;
+}
+
+.vsHolder__vsLeft {
+    display: inline-block;
+    height: 100%;
+    width: 35%;
+    background-color: #73CAFB;
+}
+
+.vsHolder__vsRight {
+}

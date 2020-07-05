@@ -1,0 +1,42 @@
+﻿.analytics {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.analytics__content {
+    position: absolute;
+    margin-top: 50px;
+    width: 80%;
+    background-color: rgba(255, 255, 255, 0.5);
+    opacity: 1;
+    height: 300px;
+}
+
+.analytics__background {
+    width: 100%;
+    min-height: 600px;
+    position: absolute;
+    overflow: auto;
+}
+
+    .analytics__background img {
+        position: absolute;
+        width: 300px;
+        opacity: 0.3;
+    }
+
+    .analytics__background :nth-child(1) {
+        left: 0px;
+    }
+
+    .analytics__background :nth-child(2) {
+        transform: scaleX(-1);
+        right: 0px;
+    }
+
+.analytics__header {
+    font-size: 2em;
+    text-align: center;
+    margin: 25px 0;
+}

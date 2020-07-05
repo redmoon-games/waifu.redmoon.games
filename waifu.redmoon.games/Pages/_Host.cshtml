@@ -1,0 +1,33 @@
+﻿@page "/"
+@namespace waifu.redmoon.games.Pages
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Summer Battle</title>
+    <base href="~/" />
+    <link rel="stylesheet" href="css/account.css" />
+    <link rel="stylesheet" href="css/achievement.css" />
+    <link rel="stylesheet" href="css/analytics.css" />
+    <link rel="stylesheet" href="css/clicker.css" />
+    <link rel="stylesheet" href="css/game.css" />
+    <link rel="stylesheet" href="css/helpers.css" />
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="/css/textHolder.css" />
+    <link rel="stylesheet" href="css/vn-layout.css" />
+    <link rel="stylesheet" href="css/vsHolder.css" />
+</head>
+<body>
+    <app>
+        <component type="typeof(App)" render-mode="ServerPrerendered" />
+    </app>
+
+    <script src="_framework/blazor.server.js"></script>
+</body>
+</html>

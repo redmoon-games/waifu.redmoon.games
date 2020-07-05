@@ -1,0 +1,47 @@
+﻿.account {
+    display: flex;
+    flex-direction: column;
+}
+
+    .account>p {
+        text-align: center;
+        margin-top: 32px;
+    }
+
+.account__profile {
+    display: flex;
+    flex-direction: row;
+    margin-top: 32px;
+}
+.account__profile img {
+    width: 10%;
+}
+.account__profile .textHolder {
+    margin-left: 15px;
+    width: 40%;
+}
+
+.account__stats {
+    display: flex;
+    flex-direction: row;
+    margin-top: 25px;
+    color: #444444;
+}
+    .account__stats .textHolder {
+        width: 40%;
+    }
+
+.account__achievements {
+    width: 100%;
+    height: 280px;
+    overflow: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+    .account__achievements .achievement {
+        width: 160px;
+        margin-bottom: 16px;
+    }
