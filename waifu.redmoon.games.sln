@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "waifu.redmoon.games", "waifu.redmoon.games\waifu.redmoon.games.csproj", "{AB64FAB4-22DB-42E8-9E35-8501FA24A097}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TournamentLibrary", "TournamentLibrary\TournamentLibrary.csproj", "{FCAA5856-10D3-44CE-82C1-339E70D7EB05}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DebugConsole", "DebugConsole\DebugConsole.csproj", "{7CB4FEF3-C34B-4B3B-B8AF-62F22BA935EE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{AB64FAB4-22DB-42E8-9E35-8501FA24A097}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB64FAB4-22DB-42E8-9E35-8501FA24A097}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB64FAB4-22DB-42E8-9E35-8501FA24A097}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCAA5856-10D3-44CE-82C1-339E70D7EB05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCAA5856-10D3-44CE-82C1-339E70D7EB05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCAA5856-10D3-44CE-82C1-339E70D7EB05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCAA5856-10D3-44CE-82C1-339E70D7EB05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CB4FEF3-C34B-4B3B-B8AF-62F22BA935EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CB4FEF3-C34B-4B3B-B8AF-62F22BA935EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CB4FEF3-C34B-4B3B-B8AF-62F22BA935EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CB4FEF3-C34B-4B3B-B8AF-62F22BA935EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

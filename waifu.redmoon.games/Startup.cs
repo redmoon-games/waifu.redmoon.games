@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using TournamentLibrary.Models;
 using waifu.redmoon.games.Data;
 
 namespace waifu.redmoon.games
@@ -28,12 +29,14 @@ namespace waifu.redmoon.games
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddSingleton<WeatherForecastService>();
+            services.AddSingleton<ITournament, BasicTournament>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ITournament trt)
         {
+            StartCompetition(app, trt);
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -54,6 +57,18 @@ namespace waifu.redmoon.games
             {
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
+            });
+        }
+
+        private static void StartCompetition(IApplicationBuilder app, ITournament trt)
+        {
+            app.Use(async (context, next) =>
+            {
+                ITeam Asui = new BasicTeam("ΐρσθ");
+                ITeam Rem = new BasicTeam("Πεμ");
+                trt.AddMember(Asui);
+                trt.AddMember(Rem);
+                await next.Invoke();
             });
         }
     }
