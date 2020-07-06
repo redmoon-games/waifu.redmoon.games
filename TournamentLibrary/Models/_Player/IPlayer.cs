@@ -12,8 +12,9 @@ namespace TournamentLibrary.Models
         string UserName { get; }
 
         void AddMoney(Score money);
-        void ClickEarn();
-        void SecondsEarn();
+        void ClickEarn(Score moneyPerClick);
+        void SecondsEarn(Score moneyPerSec);
+        void SetTeam(ITeam team);
         void SubstructMoney(Score money);
     }
 }

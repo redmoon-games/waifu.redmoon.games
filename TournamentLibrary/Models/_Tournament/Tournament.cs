@@ -8,6 +8,7 @@ namespace TournamentLibrary.Models
     {
         public ITeam[] Teams { get; private set; }
         public DateTime StartTime { get; }
+        public List<IPlayer> Players { get; }
 
         public Tournament(ITeam[] teams)
         {
@@ -26,10 +27,10 @@ namespace TournamentLibrary.Models
             return topTeam;
         }
 
-        public ITeam GetWinner()
+        public void AddPlayer(IPlayer player, ITeam toTeam)
         {
-            ITeam winner = GetTopMembersList(1).Take(1) as ITeam;
-            return winner;
+            player.SetTeam(toTeam);
+            Players.Add(player);
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Threading;
 
 namespace TournamentLibrary.Models
 {
-    class Player : IPlayer
+    public class Player : IPlayer
     {
         public string UserName { get; private set; }
         public string CurrentRank { get; set; }
@@ -14,29 +14,38 @@ namespace TournamentLibrary.Models
         public List<string> Achievements { get; private set; }
         public ITeam CurrentTeam { get; private set; }
 
-        public Player(string name, ITeam team)
+        public Player(string name)
         {
             UserName = name;
-            CurrentTeam = team;
             Money = Score.Zero();
             TotalCkicks = 0;
             Achievements = new List<string>();
         }
 
-        public void AddMoney(Score money) => Money += money;
+        public void AddMoney(Score money)
+        {
+            CurrentTeam.AddScore(money);
+            Money += money;
+        }
+
         public void SubstructMoney(Score money) => Money -= money;
 
-        public void ClickEarn()
+        public void SetTeam(ITeam team)
+        {
+            CurrentTeam = team;
+        }
+
+        public void ClickEarn(Score moneyPerClick)
         {
             if (TotalCkicks > 1_000_000_000)
                 return;
-            Money += new Score(1, 0);
+            AddMoney(moneyPerClick);
             TotalCkicks++;
         }
 
-        public void SecondsEarn()
+        public void SecondsEarn(Score moneyPerSec)
         {
-            Money += new Score(1, 0);
+            AddMoney(moneyPerSec);
         }
     }
 }
