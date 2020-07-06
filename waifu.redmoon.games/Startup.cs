@@ -29,7 +29,7 @@ namespace waifu.redmoon.games
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddSingleton<ITournament, BasicTournament>();
+            services.AddSingleton<ITournament, VSTournament>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -64,8 +64,8 @@ namespace waifu.redmoon.games
         {
             app.Use(async (context, next) =>
             {
-                ITeam Asui = new BasicTeam("ΐρσθ");
-                ITeam Rem = new BasicTeam("Πεμ");
+                ITeam Asui = new SummerTeam("ΐρσθ");
+                ITeam Rem = new SummerTeam("Πεμ");
                 trt.AddMember(Asui);
                 trt.AddMember(Rem);
                 await next.Invoke();

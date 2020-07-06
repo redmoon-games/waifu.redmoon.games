@@ -6,17 +6,18 @@ namespace TournamentLibrary.Models
 {
     public abstract class Team : ITeam
     {
-        private string _name;
         private Score _score;
 
         protected Team(string name)
         {
-            _name = name;
-            _score = Score.Zero();
+            Name = name;
+            _score = TotalScore.Zero();
+            Players = new List<IPlayer>();
         }
 
-        public string Name { get { return _name; } }
-        public IScore Score { get { return _score; } }
+        public string Name { get; }
+        public List<IPlayer> Players { get; }
+        public IScore TotalScore => _score;
 
 
         public void AddScore(Score score)
@@ -24,9 +25,9 @@ namespace TournamentLibrary.Models
             _score += score;
         }
 
-        public void AddMember(IPlayer newPlayer)
+        public void AddPlayer(IPlayer newPlayer)
         {
-
+            Players.Add(newPlayer);
         }
     }
 }

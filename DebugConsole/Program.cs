@@ -1,5 +1,5 @@
 ﻿using System;
-using TournamentLibrary.Models.Score;
+using TournamentLibrary.Models;
 
 namespace DebugConsole
 {
@@ -7,13 +7,9 @@ namespace DebugConsole
     {
         static void Main(string[] args)
         {
-            Score score = new Score(1f, 0);
-
-            for (int i = 0; i < 100; i++)
-            {
-                score *= 11;
-                Console.WriteLine(score);
-            }
+            ITeam firstTeam = new SummerTeam("Rem");
+            ITeam secondTeam = new SummerTeam("Asui");
+            ITournament tournament = new VSTournament(firstTeam, secondTeam);
         }
     }
 }

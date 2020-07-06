@@ -5,7 +5,7 @@ using System.Threading;
 
 namespace TournamentLibrary.Models
 {
-    class Player
+    class Player : IPlayer
     {
         public string UserName { get; private set; }
         public string CurrentRank { get; set; }
