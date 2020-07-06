@@ -7,16 +7,12 @@ namespace DebugConsole
     {
         static void Main(string[] args)
         {
-            Score score = new Score(900f, 3);
-            Score scoreB = new Score(250f, 2);
-            Score scoreC = new Score(123f, 2);
-            Score scoreD = new Score(123f, 1);
-            Console.WriteLine(score - scoreB);
-            Console.WriteLine(scoreB - score);
-            for (int i = 0; i < 10; i++)
+            Score score = new Score(1f, 0);
+
+            for (int i = 0; i < 100; i++)
             {
-                scoreC -= scoreB;
-                Console.WriteLine(scoreC);
+                score *= 11;
+                Console.WriteLine(score);
             }
         }
     }

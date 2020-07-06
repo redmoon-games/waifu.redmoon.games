@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 
-namespace TournamentLibrary.Models.Score
+namespace TournamentLibrary.Models
 {
-    public struct Score
+    public struct Score : IScore
     {
         private float _amount;
         private int _discharge;
@@ -97,6 +97,11 @@ namespace TournamentLibrary.Models.Score
             return a.Discharge < b.Discharge || (a.Discharge == b.Discharge && a.Amount < b.Amount);
         }
 
+        public static Score Zero()
+        {
+            return new Score(0f, 0);
+        }
+
         private static Score ConverToMaxDischarge(Score newScore)
         {
             while (Math.Abs(newScore.Amount) >= 1000)
@@ -114,8 +119,17 @@ namespace TournamentLibrary.Models.Score
 
         private static string DigitToLetter(int digit)
         {
+            const int KNOWN_DIGITS = 23;
+            const int ASCII_FIRST_LETTERS = 65 - 1;
             string digitName;
-            dischargeNames.TryGetValue(digit, out digitName);
+            if (digit > KNOWN_DIGITS)
+            {
+                int letterNum = digit + (ASCII_FIRST_LETTERS - KNOWN_DIGITS);
+                digitName = ((char)letterNum).ToString().ToLower();
+                digitName += digitName;
+            }
+            else
+                dischargeNames.TryGetValue(digit, out digitName);
             return digitName;
         }
 

@@ -7,24 +7,26 @@ namespace TournamentLibrary.Models
     public abstract class Team : ITeam
     {
         private string _name;
+        private Score _score;
 
         protected Team(string name)
         {
             _name = name;
-            Score = 0;
+            _score = Score.Zero();
         }
 
         public string Name { get { return _name; } }
-        public int Score { get; private set; }
+        public IScore Score { get { return _score; } }
 
 
-        public void AddScore(int score)
+        public void AddScore(Score score)
         {
-            if (score < 0)
-                throw new ArgumentOutOfRangeException("Score should be grater than 0!");
+            _score += score;
+        }
 
-            // Добавить проверку на переполнение.
-            Score += score;
+        public void AddMember(IPlayer newPlayer)
+        {
+
         }
     }
 }

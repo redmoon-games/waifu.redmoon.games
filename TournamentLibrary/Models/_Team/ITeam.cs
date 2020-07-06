@@ -3,8 +3,8 @@
     public interface ITeam
     {
         string Name { get; }
-        int Score { get; }
-        
-        void AddScore(int score);
+        IScore Score { get; }
+
+        void AddScore(Score score);
     }
 }
