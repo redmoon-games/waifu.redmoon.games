@@ -7,6 +7,7 @@ namespace TournamentLibrary.UpdateSystem
 {
     public class UpgradeModel
     {
+        public int Id { get; }
         public string Name { get; }
         public BigNumber UpgradePrice { get; private set; }
         public BigNumber Income { get; private set; }
@@ -14,12 +15,18 @@ namespace TournamentLibrary.UpdateSystem
         public float GrowthRate { get; private set; }
 
 
-        public UpgradeModel(string name, BigNumber price, BigNumber income, float growthRate)
+        public UpgradeModel(int id, string name, BigNumber price, BigNumber income, float growthRate)
         {
+            Id = id;
             Name = name;
             UpgradePrice = price;
             Income = income;
             GrowthRate = growthRate;
+        }
+
+        public UpgradeModel(string name, BigNumber price, BigNumber income, float growthRate)
+            : this(0, name, price, income, growthRate)
+        {
         }
     }
 }

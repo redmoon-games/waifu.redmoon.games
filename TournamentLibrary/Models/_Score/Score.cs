@@ -7,6 +7,12 @@ namespace TournamentLibrary.Models
 {
     public struct BigNumber : IEquatable<BigNumber>, IComparable<BigNumber>
     {
+        public float Amount { get { return _amount; } }
+        public int Discharge { get { return _discharge; } }
+
+        public static BigNumber Zero = new BigNumber(0, 0);
+        public static BigNumber One = new BigNumber(1, 0);
+
         private float _amount;
         private int _discharge;
         private static Dictionary<int, string> dischargeNames = new Dictionary<int, string>()
@@ -35,9 +41,6 @@ namespace TournamentLibrary.Models
             { 22, "Centillion"},
             { 23, "MAX"},
         };
-
-        public float Amount { get { return _amount; } }
-        public int Discharge { get { return _discharge; } }
 
         public BigNumber(float amount, int discharge)
         {
@@ -69,7 +72,18 @@ namespace TournamentLibrary.Models
             BigNumber newScore = new BigNumber(a.Amount - b.Amount, a.Discharge);
             return ConverToMaxDischarge(newScore);
         }
+        public static BigNumber operator *(BigNumber a, BigNumber b)
+        {
+            MakeSameDischarge(ref a, ref b);
+            BigNumber newScore = new BigNumber(a.Amount * b.Amount, a.Discharge);
+            return ConverToMaxDischarge(newScore);
+        }
         public static BigNumber operator *(BigNumber a, float b)
+        {
+            BigNumber newScore = new BigNumber(a.Amount * b, a.Discharge);
+            return ConverToMaxDischarge(newScore);
+        }
+        public static BigNumber operator *(BigNumber a, int b)
         {
             BigNumber newScore = new BigNumber(a.Amount * b, a.Discharge);
             return ConverToMaxDischarge(newScore);
@@ -97,13 +111,22 @@ namespace TournamentLibrary.Models
             return a.CompareTo(b) < 0;
         }
 
-        public static BigNumber Zero()
+        public static BigNumber ConverToMaxDischarge(BigNumber newScore)
         {
-            return new BigNumber(0f, 0);
+            while (Math.Abs(newScore.Amount) >= 1000)
+                newScore = new BigNumber(newScore.Amount / 1000, newScore.Discharge + 1);
+            return newScore;
         }
-
-        private static BigNumber ConverToMaxDischarge(BigNumber newScore)
+        public static BigNumber ConverToMaxDischarge(float score)
         {
+            BigNumber newScore = new BigNumber(score, 0);
+            while (Math.Abs(newScore.Amount) >= 1000)
+                newScore = new BigNumber(newScore.Amount / 1000, newScore.Discharge + 1);
+            return newScore;
+        }
+        public static BigNumber ConverToMaxDischarge(int score)
+        {
+            BigNumber newScore = new BigNumber(score, 0);
             while (Math.Abs(newScore.Amount) >= 1000)
                 newScore = new BigNumber(newScore.Amount / 1000, newScore.Discharge + 1);
             return newScore;

@@ -7,14 +7,24 @@ namespace TournamentLibrary.UpdateSystem
 {
     public abstract class UpgradesBundle : IUpgradesBundle
     {
-        public Dictionary<int, int> UpgradeLvlByID { get; }
+        protected Dictionary<int, int> CurrentUpgradesLvl_By_ID { get; }
+
+        public BigNumber MoneyPerClick
+        {
+            get { return new BigNumber(); }
+        }
+
+        public BigNumber MoneyPerSec
+        {
+            get { return new BigNumber(); }
+        }
 
         private readonly UpgradeModel[] _upgradesTemplate;
 
         public UpgradesBundle(UpgradeModel[] upgrades)
         {
             _upgradesTemplate = upgrades;
-            UpgradeLvlByID = CreateUpgradeDictionary(upgrades);
+            CurrentUpgradesLvl_By_ID = CreateUpgradeDictionary(upgrades);
         }
 
         public BigNumber GetUpgradePrice(int upgradeId)
@@ -27,7 +37,7 @@ namespace TournamentLibrary.UpdateSystem
         {
             if (IdIsExist(updateId))
             {
-                UpgradeLvlByID[updateId] += numberOfUpgrades;
+                CurrentUpgradesLvl_By_ID[updateId] += numberOfUpgrades;
             }
             throw new NullReferenceException("Id is not correct!");
         }
@@ -35,7 +45,7 @@ namespace TournamentLibrary.UpdateSystem
         {
             if (IdIsExist(updateId))
             {
-                UpgradeLvlByID.TryGetValue(updateId, out int lvl);
+                CurrentUpgradesLvl_By_ID.TryGetValue(updateId, out int lvl);
                 return lvl;
             }
             throw new NullReferenceException("Id is not correct!");
@@ -46,13 +56,17 @@ namespace TournamentLibrary.UpdateSystem
             Dictionary<int, int> currentUpdates = new Dictionary<int, int>();
             for (int i = 0; i < upgrades.Length; i++)
             {
-                currentUpdates.Add(i, 0);
+                if (currentUpdates.ContainsKey(upgrades[i].Id))
+                    throw new ArgumentException($"You are trying to create UpgradeBundle in which 2 upgrades have the same id: {upgrades[i].Id}. Change ID of {upgrades[i].Name} to resolve the conflict!");
+                currentUpdates.Add(upgrades[i].Id, 0);
             }
             return currentUpdates;
         }
         private bool IdIsExist(int updateId)
         {
-            return UpgradeLvlByID.TryGetValue(updateId, out int id);
+            return CurrentUpgradesLvl_By_ID.TryGetValue(updateId, out int id);
         }
+
+        bool IUpgradesBundle.IdIsExist(int id) => CurrentUpgradesLvl_By_ID.ContainsKey(id);
     }
 }

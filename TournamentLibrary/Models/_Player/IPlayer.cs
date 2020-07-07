@@ -1,20 +1,11 @@
-﻿using System.Collections.Generic;
-
-namespace TournamentLibrary.Models
+﻿namespace TournamentLibrary.Models
 {
     public interface IPlayer
     {
-        List<string> Achievements { get; }
-        string CurrentRank { get; set; }
-        ITeam CurrentTeam { get; }
-        BigNumber Money { get; }
-        int TotalCkicks { get; }
-        string UserName { get; }
+        IPlayerInfo ProfileInfo { get; }
 
-        void AddMoney(BigNumber money);
-        void ClickEarn(BigNumber moneyPerClick);
-        void SecondsEarn(BigNumber moneyPerSec);
-        void SetTeam(ITeam team);
-        void SubstructMoney(BigNumber money);
+        void BuyUpdate(int UpgradeID, BigNumber updateCost, int numberOfUpdates = 1);
+        void GetClickReward();
+        void GetSecondReward();
     }
 }
