@@ -19,7 +19,7 @@ namespace waifu.redmoon.games
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-        }
+        } //NLog, Serilog, log4net
 
         public IConfiguration Configuration { get; }
 
@@ -29,7 +29,11 @@ namespace waifu.redmoon.games
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddSingleton<ITournament, VSTournament>();
+
+            ITeam Rem = new SummerTeam("Ðýì");
+            ITeam Zui = new SummerTeam(Configuration.GetSection("TeamA").Get<TeamSettings>().Name);
+            //services.AddTransient<ITeam>(x => new SummerTeam(Guid.NewGuid().ToString()));
+            services.AddSingleton<ITournament>(x => new VSTournament(Zui, Rem));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -64,10 +68,14 @@ namespace waifu.redmoon.games
         {
             app.Use(async (context, next) =>
             {
+                ITournament tournament = app.ApplicationServices.GetRequiredService<ITournament>();
                 ITeam Asui = new SummerTeam("Àñóè");
-                ITeam Rem = new SummerTeam("Ðåì");
-                trt.AddMember(Asui);
-                trt.AddMember(Rem);
+                ITeam Rem = new SummerTeam("Àñóè");
+                ITournament tournament1 = app.ApplicationServices.GetRequiredService<ITournament>();
+                IPlayer newPlayer = new Player("saha1506");
+                IPlayer newPlayer2 = new Player("ZaBiAVaKa");
+                tournament.AddPlayer(newPlayer, Asui);
+                tournament1.AddPlayer(newPlayer2, Rem);
                 await next.Invoke();
             });
         }

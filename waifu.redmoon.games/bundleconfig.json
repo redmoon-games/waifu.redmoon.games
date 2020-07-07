@@ -1,0 +1,17 @@
+[
+  {
+    "outputFileName": "wwwroot/css/bundle.css",
+    "inputFiles": [
+      "wwwroot/css/account.css",
+      "wwwroot/css/achievement.css",
+      "wwwroot/css/analytics.css",
+      "wwwroot/css/clicker.css",
+      "wwwroot/css/game.css",
+      "wwwroot/css/helpers.css",
+      "wwwroot/css/normalize.css",
+      "wwwroot/css/textHolder.css",
+      "wwwroot/css/vn-layout.css",
+      "wwwroot/css/vsHolder.css"
+    ]
+  }
+]

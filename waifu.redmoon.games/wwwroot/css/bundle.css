@@ -1,0 +1,697 @@
+.account {
+    display: flex;
+    flex-direction: column;
+}
+
+    .account>p {
+        text-align: center;
+        margin-top: 32px;
+    }
+
+.account__profile {
+    display: flex;
+    flex-direction: row;
+    margin-top: 32px;
+}
+.account__profile img {
+    width: 10%;
+}
+.account__profile .textHolder {
+    margin-left: 15px;
+    width: 45%;
+}
+
+.account__stats {
+    display: flex;
+    flex-direction: row;
+    margin-top: 25px;
+    color: #444444;
+}
+    .account__stats .textHolder {
+        width: 40%;
+    }
+
+.account__achievements {
+    width: 100%;
+    height: 280px;
+    overflow: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+    .account__achievements .achievement {
+        width: 160px;
+        margin-bottom: 16px;
+    }
+.achievement {
+}
+    .achievement img {
+
+    }
+    .achievement p {
+        text-align: center;
+        margin: 0;
+    }
+.analytics {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.analytics__content {
+    position: absolute;
+    margin-top: 50px;
+    width: 80%;
+    background-color: rgba(255, 255, 255, 0.5);
+    opacity: 1;
+    height: 300px;
+}
+
+.analytics__background {
+    width: 100%;
+    min-height: 600px;
+    position: absolute;
+    overflow: auto;
+}
+
+    .analytics__background img {
+        position: absolute;
+        width: 300px;
+        opacity: 0.3;
+    }
+
+    .analytics__background :nth-child(1) {
+        left: 0px;
+    }
+
+    .analytics__background :nth-child(2) {
+        transform: scaleX(-1);
+        right: 0px;
+    }
+
+.analytics__header {
+    font-size: 2em;
+    text-align: center;
+    margin: 25px 0;
+}
+
+
+.clicker__tap {
+    background-color: aliceblue;
+}
+    .clicker__tap button {
+        width: 100%;
+        height: 500px;
+        background-color: rgba(255, 255, 255, 0.00);
+        border: none;
+        outline: none;
+    }
+        .clicker__tap button:hover {
+            background-color: rgba(0, 0, 0, 0.30);
+        }
+        .clicker__tap button:active {
+            background-color: rgba(0, 0, 0, 0.40);
+        }
+    .clicker__tap img {
+        width: 100%;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+    }
+    .clicker__tap p {
+        width: 100%;
+        position: absolute;
+        font-size: 3em;
+        color: #497ebf;
+    }
+
+.clicker {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+.clicker__stats {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 25px;
+}
+
+.updates {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.updates__list {
+}
+
+.updates__item {
+    
+    width: 100%;
+    background-color: none;
+    margin-top: 10px;
+}
+    .updates__item:hover {
+        background-color: rgba(0, 0, 0, 0.25);
+    }
+    .updates__item:active {
+        background-color: rgba(0, 0, 0, 0.35);
+    }
+
+.updates__itemContent:hover {
+    background-color: rgba(0, 0, 0, 0.0);
+}
+
+.updates__itemContent {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: none;
+}
+    .updates__itemContent img {
+        width: 64px;
+    }
+
+.updates__megaUpdate {
+    width: 100%;
+    padding: 20px 0;
+    position: absolute;
+    bottom: 0px;
+    background-color: #497ebf;
+    color: white;
+    text-align: center;
+    font-size: 2em;
+}
+    .updates__megaUpdate:hover {
+        background-color: #17519A;
+    }
+    .updates__megaUpdate:active {
+        background-color: #497ebf;
+    }
+.game {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 20px;
+}
+
+.game__header {
+    border-radius: 20px 20px 0 0;
+    background-color: #6FC7E3;
+    color: white;
+}
+
+.game__title {
+    text-align: center;
+    margin: 12px 0;
+    font-size: 1.25em;
+}
+
+.game__menu {
+    width: 100%;
+    height: 55px;
+    font-size: 1.7em;
+    display: flex;
+    justify-content: center;
+}
+
+    .game__menu button {
+        width: 33%;
+        height: 100%;
+        border: none;
+        background: none;
+        background-color: #6FC7E3;
+        border-left: 4px solid white;
+        color: white;
+    }
+
+        .game__menu button:hover {
+            background-color: #328aa7;
+        }
+
+        .game__menu button:first-child {
+            border-left: none;
+        }
+
+.game__body {
+    height: 500px;
+}
+
+.hide {
+    display: none;
+}
+/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
+
+/* Document
+   ========================================================================== */
+
+/**
+ * 1. Correct the line height in all browsers.
+ * 2. Prevent adjustments of font size after orientation changes in iOS.
+ */
+
+html {
+    line-height: 1.15; /* 1 */
+    -webkit-text-size-adjust: 100%; /* 2 */
+}
+
+/* Sections
+   ========================================================================== */
+
+/**
+ * Remove the margin in all browsers.
+ */
+
+body {
+    margin: 0;
+}
+
+/**
+ * Render the `main` element consistently in IE.
+ */
+
+main {
+    display: block;
+}
+
+/**
+ * Correct the font size and margin on `h1` elements within `section` and
+ * `article` contexts in Chrome, Firefox, and Safari.
+ */
+
+h1 {
+    font-size: 2em;
+    margin: 0.67em 0;
+}
+
+/* Grouping content
+   ========================================================================== */
+
+/**
+ * 1. Add the correct box sizing in Firefox.
+ * 2. Show the overflow in Edge and IE.
+ */
+
+hr {
+    box-sizing: content-box; /* 1 */
+    height: 0; /* 1 */
+    overflow: visible; /* 2 */
+}
+
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+
+pre {
+    font-family: monospace, monospace; /* 1 */
+    font-size: 1em; /* 2 */
+}
+
+/* Text-level semantics
+   ========================================================================== */
+
+/**
+ * Remove the gray background on active links in IE 10.
+ */
+
+a {
+    background-color: transparent;
+}
+
+/**
+ * 1. Remove the bottom border in Chrome 57-
+ * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
+ */
+
+abbr[title] {
+    border-bottom: none; /* 1 */
+    text-decoration: underline; /* 2 */
+    text-decoration: underline dotted; /* 2 */
+}
+
+/**
+ * Add the correct font weight in Chrome, Edge, and Safari.
+ */
+
+b,
+strong {
+    font-weight: bolder;
+}
+
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+
+code,
+kbd,
+samp {
+    font-family: monospace, monospace; /* 1 */
+    font-size: 1em; /* 2 */
+}
+
+/**
+ * Add the correct font size in all browsers.
+ */
+
+small {
+    font-size: 80%;
+}
+
+/**
+ * Prevent `sub` and `sup` elements from affecting the line height in
+ * all browsers.
+ */
+
+sub,
+sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+}
+
+sub {
+    bottom: -0.25em;
+}
+
+sup {
+    top: -0.5em;
+}
+
+/* Embedded content
+   ========================================================================== */
+
+/**
+ * Remove the border on images inside links in IE 10.
+ */
+
+img {
+    border-style: none;
+    width: 100%;
+}
+
+/* Forms
+   ========================================================================== */
+
+/**
+ * 1. Change the font styles in all browsers.
+ * 2. Remove the margin in Firefox and Safari.
+ */
+
+button,
+input,
+optgroup,
+select,
+textarea {
+    font-family: inherit; /* 1 */
+    font-size: 100%; /* 1 */
+    line-height: 1.15; /* 1 */
+    margin: 0; /* 2 */
+}
+
+/**
+ * Show the overflow in IE.
+ * 1. Show the overflow in Edge.
+ */
+
+button,
+input { /* 1 */
+    overflow: visible;
+    border: none;
+    outline: none;
+}
+
+/**
+ * Remove the inheritance of text transform in Edge, Firefox, and IE.
+ * 1. Remove the inheritance of text transform in Firefox.
+ */
+
+button,
+select { /* 1 */
+    text-transform: none;
+}
+
+/**
+ * Correct the inability to style clickable types in iOS and Safari.
+ */
+
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+    -webkit-appearance: button;
+}
+
+    /**
+ * Remove the inner border and padding in Firefox.
+ */
+
+    button::-moz-focus-inner,
+    [type="button"]::-moz-focus-inner,
+    [type="reset"]::-moz-focus-inner,
+    [type="submit"]::-moz-focus-inner {
+        border-style: none;
+        padding: 0;
+    }
+
+    /**
+ * Restore the focus styles unset by the previous rule.
+ */
+
+    button:-moz-focusring,
+    [type="button"]:-moz-focusring,
+    [type="reset"]:-moz-focusring,
+    [type="submit"]:-moz-focusring {
+        outline: 1px dotted ButtonText;
+    }
+
+/**
+ * Correct the padding in Firefox.
+ */
+
+fieldset {
+    padding: 0.35em 0.75em 0.625em;
+}
+
+/**
+ * 1. Correct the text wrapping in Edge and IE.
+ * 2. Correct the color inheritance from `fieldset` elements in IE.
+ * 3. Remove the padding so developers are not caught out when they zero out
+ *    `fieldset` elements in all browsers.
+ */
+
+legend {
+    box-sizing: border-box; /* 1 */
+    color: inherit; /* 2 */
+    display: table; /* 1 */
+    max-width: 100%; /* 1 */
+    padding: 0; /* 3 */
+    white-space: normal; /* 1 */
+}
+
+/**
+ * Add the correct vertical alignment in Chrome, Firefox, and Opera.
+ */
+
+progress {
+    vertical-align: baseline;
+}
+
+/**
+ * Remove the default vertical scrollbar in IE 10+.
+ */
+
+textarea {
+    overflow: auto;
+}
+
+/**
+ * 1. Add the correct box sizing in IE 10.
+ * 2. Remove the padding in IE 10.
+ */
+
+[type="checkbox"],
+[type="radio"] {
+    box-sizing: border-box; /* 1 */
+    padding: 0; /* 2 */
+}
+
+/**
+ * Correct the cursor style of increment and decrement buttons in Chrome.
+ */
+
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
+    height: auto;
+}
+
+/**
+ * 1. Correct the odd appearance in Chrome and Safari.
+ * 2. Correct the outline style in Safari.
+ */
+
+[type="search"] {
+    -webkit-appearance: textfield; /* 1 */
+    outline-offset: -2px; /* 2 */
+}
+
+    /**
+ * Remove the inner padding in Chrome and Safari on macOS.
+ */
+
+    [type="search"]::-webkit-search-decoration {
+        -webkit-appearance: none;
+    }
+
+/**
+ * 1. Correct the inability to style clickable types in iOS and Safari.
+ * 2. Change font properties to `inherit` in Safari.
+ */
+
+::-webkit-file-upload-button {
+    -webkit-appearance: button; /* 1 */
+    font: inherit; /* 2 */
+}
+
+/* Interactive
+   ========================================================================== */
+
+/*
+ * Add the correct display in Edge, IE 10+, and Firefox.
+ */
+
+details {
+    display: block;
+}
+
+/*
+ * Add the correct display in all browsers.
+ */
+
+summary {
+    display: list-item;
+}
+
+/* Misc
+   ========================================================================== */
+
+/**
+ * Add the correct display in IE 10+.
+ */
+
+template {
+    display: none;
+}
+
+/**
+ * Add the correct display in IE 10.
+ */
+
+[hidden] {
+    display: none;
+}
+
+.textHolder {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+    .textHolder--medium .textHolder__description {
+        font-weight: 300;
+        font-size: 1.2em;
+    }
+
+    .textHolder--medium .textHolder__content {
+        font-weight: 900;
+        font-size: 1.7em;
+    }
+    .textHolder--small .textHolder__description {
+        font-weight: 300;
+        font-size: 1em;
+    }
+
+    .textHolder--small .textHolder__content {
+        font-weight: 700;
+        font-size: 1.4em;
+    }
+
+.textHolder__description {
+    font-size: 1em;
+}
+
+.textHolder__content {
+    font-size: 1.2em;
+}
+@font-face {
+    font-family: Roboto;
+    src: url(/fonts/Roboto-Black.ttf);
+    font-weight: 900;
+}
+
+@font-face {
+    font-family: Roboto;
+    src: url(/fonts/Roboto-Medium.ttf);
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: Roboto;
+    src: url(/fonts/Roboto-Light.ttf);
+    font-weight: 300;
+}
+
+body {
+    font-family: Roboto;
+}
+
+.bg {
+    display: flex;
+    justify-content: center;
+    height: 80vh;
+    width: 100%;
+    background-image: url(../img/bg-beach.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.bg__window {
+    width: 1000px;
+    height: 500px;
+    margin-top: 50px;
+}
+
+.bodyPanel {
+    display: flex;
+}
+
+.bodyPanel__leftSide {
+    width: 30%;
+    position: relative;
+}
+
+.bodyPanel__rightSide {
+    width: 70%;
+    position: relative;
+}
+.vsHolder {
+    height: 45px;
+    width: 100%;
+    background-color: #FBB473;
+}
+
+.vsHolder__vsLeft {
+    display: inline-block;
+    height: 100%;
+    width: 35%;
+    background-color: #73CAFB;
+}
+
+.vsHolder__vsRight {
+}

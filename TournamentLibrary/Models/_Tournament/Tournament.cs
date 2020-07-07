@@ -14,6 +14,7 @@ namespace TournamentLibrary.Models
         {
             StartTime = DateTime.Now;
             Teams = teams;
+            Players = new List<IPlayer>();
         }
 
         public virtual ITeam GetTopTeam()

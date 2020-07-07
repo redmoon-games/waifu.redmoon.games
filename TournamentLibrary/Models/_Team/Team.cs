@@ -6,19 +6,22 @@ namespace TournamentLibrary.Models
 {
     public abstract class Team : ITeam
     {
-        private Score _score;
+        private BigNumber _score;
 
-        protected Team(string name)
+        public string[] Rangs;
+        public List<UpgradeModel> Upgrades;
+
+        protected Team()
         {
-            Name = name;
-            _score = TotalScore.Zero();
+            Name = "No name team";
+            List<UpgradeModel> Upgrades = new List<UpgradeModel>();
         }
 
         public string Name { get; }
-        public IScore TotalScore => _score;
+        public BigNumber TotalScore => _score;
 
 
-        public void AddScore(Score score)
+        public void AddScore(BigNumber score)
         {
             _score += score;
         }

@@ -7,14 +7,14 @@ namespace TournamentLibrary.Models
         List<string> Achievements { get; }
         string CurrentRank { get; set; }
         ITeam CurrentTeam { get; }
-        Score Money { get; }
+        BigNumber Money { get; }
         int TotalCkicks { get; }
         string UserName { get; }
 
-        void AddMoney(Score money);
-        void ClickEarn(Score moneyPerClick);
-        void SecondsEarn(Score moneyPerSec);
+        void AddMoney(BigNumber money);
+        void ClickEarn(BigNumber moneyPerClick);
+        void SecondsEarn(BigNumber moneyPerSec);
         void SetTeam(ITeam team);
-        void SubstructMoney(Score money);
+        void SubstructMoney(BigNumber money);
     }
 }

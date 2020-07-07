@@ -2,40 +2,42 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using TournamentLibrary.UpdateSystem;
 
 namespace TournamentLibrary.Models
 {
     public class Player : IPlayer
     {
-        public string UserName { get; private set; }
-        public string CurrentRank { get; set; }
-        public Score Money { get; private set; }
-        public int TotalCkicks { get; private set; }
-        public List<string> Achievements { get; private set; }
-        public ITeam CurrentTeam { get; private set; }
+        public IPlayerInfo ProfileInfo { get; }
+        public IPlayerStatistic Statistic { get; }
+        public IUpgradesBundle CurrentUpdates { get; }
 
-        public Player(string name)
+
+        public Player(string name, ITeam team)
         {
             UserName = name;
-            Money = Score.Zero();
-            TotalCkicks = 0;
-            Achievements = new List<string>();
+            Money = BigNumber.Zero();
+
+            if (team.Name == "Rem")
+                CurrentUpdates = UpdateSystemFactory.Create(UpgradeSystemType.Rem);
+            else
+                CurrentUpdates = UpdateSystemFactory.Create(UpgradeSystemType.Zui);
         }
 
-        public void AddMoney(Score money)
+        public void AddMoney(BigNumber money)
         {
             CurrentTeam.AddScore(money);
             Money += money;
         }
 
-        public void SubstructMoney(Score money) => Money -= money;
+        public void SubstructMoney(BigNumber money) => Money -= money;
 
         public void SetTeam(ITeam team)
         {
             CurrentTeam = team;
         }
 
-        public void ClickEarn(Score moneyPerClick)
+        public void ClickEarn(BigNumber moneyPerClick)
         {
             if (TotalCkicks > 1_000_000_000)
                 return;
@@ -43,7 +45,7 @@ namespace TournamentLibrary.Models
             TotalCkicks++;
         }
 
-        public void SecondsEarn(Score moneyPerSec)
+        public void SecondsEarn(BigNumber moneyPerSec)
         {
             AddMoney(moneyPerSec);
         }

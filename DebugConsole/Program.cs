@@ -16,10 +16,10 @@ namespace DebugConsole
 
             for (int i = 0; i < 10; i++)
             {
-                newPlayer.ClickEarn(new Score(12, 0));
+                newPlayer.ClickEarn(new BigNumber(12, 0));
             }
 
-            newPlayer.AddMoney(new Score(125, 0));
+            newPlayer.AddMoney(new BigNumber(125, 0));
 
             Console.WriteLine(tournament);
         }

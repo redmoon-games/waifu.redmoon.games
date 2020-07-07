@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TournamentLibrary.Models
 {
-    public struct Score : IScore
+    public struct BigNumber : IEquatable<BigNumber>, IComparable<BigNumber>
     {
         private float _amount;
         private int _discharge;
@@ -39,12 +39,12 @@ namespace TournamentLibrary.Models
         public float Amount { get { return _amount; } }
         public int Discharge { get { return _discharge; } }
 
-        public Score(float amount, int discharge)
+        public BigNumber(float amount, int discharge)
         {
             _amount = amount;
             _discharge = discharge;
         }
-        public Score(Score score)
+        public BigNumber(BigNumber score)
         {
             _amount = score.Amount;
             _discharge = score.Discharge;
@@ -57,59 +57,59 @@ namespace TournamentLibrary.Models
             return $"({ beautyAmount } { dischargeName })";
         }
 
-        public static Score operator +(Score a, Score b)
+        public static BigNumber operator +(BigNumber a, BigNumber b)
         {
             MakeSameDischarge(ref a, ref b);
-            Score newScore = new Score(a.Amount + b.Amount, a.Discharge);
+            BigNumber newScore = new BigNumber(a.Amount + b.Amount, a.Discharge);
             return ConverToMaxDischarge(newScore);
         }
-        public static Score operator -(Score a, Score b)
+        public static BigNumber operator -(BigNumber a, BigNumber b)
         {
             MakeSameDischarge(ref a, ref b);
-            Score newScore = new Score(a.Amount - b.Amount, a.Discharge);
+            BigNumber newScore = new BigNumber(a.Amount - b.Amount, a.Discharge);
             return ConverToMaxDischarge(newScore);
         }
-        public static Score operator *(Score a, float b)
+        public static BigNumber operator *(BigNumber a, float b)
         {
-            Score newScore = new Score(a.Amount * b, a.Discharge);
+            BigNumber newScore = new BigNumber(a.Amount * b, a.Discharge);
             return ConverToMaxDischarge(newScore);
         }
-        public static Score operator /(Score a, float b)
+        public static BigNumber operator /(BigNumber a, float b)
         {
-            Score newScore = new Score(a.Amount / b, a.Discharge);
+            BigNumber newScore = new BigNumber(a.Amount / b, a.Discharge);
             return ConverToMaxDischarge(newScore);
         }
 
-        public static bool operator ==(Score a, Score b)
+        public static bool operator ==(BigNumber a, BigNumber b)
         {
-            return a.Amount == b.Amount && a.Discharge == b.Discharge;
+            return a.Equals(b);
         }
-        public static bool operator !=(Score a, Score b)
+        public static bool operator !=(BigNumber a, BigNumber b)
         {
-            return a.Amount != b.Amount || a.Discharge != b.Discharge;
+            return !a.Equals(b);
         }
-        public static bool operator >(Score a, Score b)
+        public static bool operator >(BigNumber a, BigNumber b)
         {
-            return a.Discharge > b.Discharge || (a.Discharge == b.Discharge && a.Amount > b.Amount);
+            return a.CompareTo(b) > 0;
         }
-        public static bool operator <(Score a, Score b)
+        public static bool operator <(BigNumber a, BigNumber b)
         {
-            return a.Discharge < b.Discharge || (a.Discharge == b.Discharge && a.Amount < b.Amount);
-        }
-
-        public static Score Zero()
-        {
-            return new Score(0f, 0);
+            return a.CompareTo(b) < 0;
         }
 
-        private static Score ConverToMaxDischarge(Score newScore)
+        public static BigNumber Zero()
+        {
+            return new BigNumber(0f, 0);
+        }
+
+        private static BigNumber ConverToMaxDischarge(BigNumber newScore)
         {
             while (Math.Abs(newScore.Amount) >= 1000)
-                newScore = new Score(newScore.Amount / 1000, newScore.Discharge + 1);
+                newScore = new BigNumber(newScore.Amount / 1000, newScore.Discharge + 1);
             return newScore;
         }
 
-        private static void MakeSameDischarge(ref Score a, ref Score b)
+        private static void MakeSameDischarge(ref BigNumber a, ref BigNumber b)
         {
             if (b.Discharge >= a.Discharge)
                 a = ChangeToDigit(a, b.Discharge);
@@ -133,7 +133,7 @@ namespace TournamentLibrary.Models
             return digitName;
         }
 
-        private static Score ChangeToDigit(Score score, int newDigit)
+        private static BigNumber ChangeToDigit(BigNumber score, int newDigit)
         {
             const int THOUSAND_DIGIT = 3; //1000
             int oldDigit = score.Discharge;
@@ -141,7 +141,27 @@ namespace TournamentLibrary.Models
 
             double difference = Math.Pow(10, (oldDigit - newDigit) * THOUSAND_DIGIT);
             float newAmount = (float)(oldAmount * difference);
-            return new Score() { _amount = newAmount, _discharge = newDigit };
+            return new BigNumber() { _amount = newAmount, _discharge = newDigit };
+        }
+
+        public bool Equals(BigNumber other)
+        {
+            return Amount != other.Amount || Discharge != other.Discharge;
+        }
+
+        public int CompareTo(BigNumber other)
+        {
+            if (Discharge > other.Discharge ||
+                (Discharge == other.Discharge && Amount > other.Amount))
+            {
+                return 1;
+            }
+            else if (Discharge == other.Discharge && Amount == other.Amount)
+            {
+                return 0;
+            }
+            else 
+                return -1;
         }
     }
 }
