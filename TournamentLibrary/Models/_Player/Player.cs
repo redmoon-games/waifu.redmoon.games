@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Text;
 using System.Threading;
+using TournamentLibrary.MoneySystem;
 using TournamentLibrary.UpdateSystem;
 
 namespace TournamentLibrary.Models
@@ -19,21 +20,31 @@ namespace TournamentLibrary.Models
         {
             ProfileInfo = new WebPlayerInfo(name);
 
-            if (team.Name == "Rem")
-                updates = UpdateSystemFactory.Create(UpgradeSystemType.Rem);
-            else
-                updates = UpdateSystemFactory.Create(UpgradeSystemType.Zui);
+            UpgradeSystemType playerUpgradeSystem = ChooseUpgradeSystem(team);
+            updates = UpdateSystemFactory.Create(playerUpgradeSystem);
         }
 
-        public void GetClickReward()
+        private static UpgradeSystemType ChooseUpgradeSystem(ITeam team)
         {
-            moneySystem.AddMoney(updates.MoneyPerClick, RewardType.Click);
+            UpgradeSystemType playerUpgradeSystem;
+            if (team.Name == "Rem")
+                playerUpgradeSystem = UpgradeSystemType.Rem;
+            else
+                playerUpgradeSystem = UpgradeSystemType.Rem;
+            return playerUpgradeSystem;
+        }
+
+        public void AddClickReward()
+        {
+            BigNumber moneyToAdd = updates.MoneyPerClick;
+            moneySystem.AddMoney(moneyToAdd);
             statistic.PlayerGetClickReward();
         }
 
-        public void GetSecondReward()
+        public void AddSecondReward()
         {
-            moneySystem.AddMoney(updates.MoneyPerSec, RewardType.Second);
+            BigNumber moneyToAdd = updates.MoneyPerSec;
+            moneySystem.AddMoney(moneyToAdd);
             statistic.PlayerGetSecReward();
         }
 
@@ -42,11 +53,7 @@ namespace TournamentLibrary.Models
             BigNumber fullCost;
             if (numberOfUpdates < 1)
                 throw new ArgumentOutOfRangeException($"numberOfUpdates: {numberOfUpdates}\nShould be greather than 0!");
-
-            if (updates.IdIsExist(UpgradeID) == false)
-                throw new ArgumentOutOfRangeException($"There is no upgrade with ID: {UpgradeID}\n");
-
-            if (numberOfUpdates > 1)
+            else if (numberOfUpdates > 1)
                 fullCost = BigNumber.ConverToMaxDischarge(numberOfUpdates) * updateCost;
             else
                 fullCost = updateCost;

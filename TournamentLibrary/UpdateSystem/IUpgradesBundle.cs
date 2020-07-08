@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using TournamentLibrary.Models;
+﻿using TournamentLibrary.Models;
 
 namespace TournamentLibrary.UpdateSystem
 {
@@ -7,11 +6,8 @@ namespace TournamentLibrary.UpdateSystem
     {
         BigNumber MoneyPerClick { get; }
         BigNumber MoneyPerSec { get; }
+        UpgradeModel[] Upgrades { get; }
 
-        bool IdIsExist(int id);
-
-        int GetUpgradeLvl(int updateId);
-        BigNumber GetUpgradePrice(int upgradeId);
         void AddLvlToUpgrade(int updateId, int numberOfUpgrades = 1);
     }
 }

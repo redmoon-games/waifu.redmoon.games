@@ -5,7 +5,7 @@
         IPlayerInfo ProfileInfo { get; }
 
         void BuyUpdate(int UpgradeID, BigNumber updateCost, int numberOfUpdates = 1);
-        void GetClickReward();
-        void GetSecondReward();
+        void AddClickReward();
+        void AddSecondReward();
     }
 }

@@ -9,24 +9,28 @@ namespace TournamentLibrary.UpdateSystem
     {
         public int Id { get; }
         public string Name { get; }
+        public UpgradeType Type { get; }
+        public int Lvl { get; private set; }
         public BigNumber UpgradePrice { get; private set; }
-        public BigNumber Income { get; private set; }
-        public BigNumber IncomePerLvl { get; private set; }
-        public float GrowthRate { get; private set; }
+        public BigNumber Income { get { return _incomePerLvl * Lvl; } }
 
+        private BigNumber _incomePerLvl;
+        private float _growthRate;
 
-        public UpgradeModel(int id, string name, BigNumber price, BigNumber income, float growthRate)
+        public UpgradeModel(int id, string name, BigNumber price, BigNumber incomePerLvl, float growthRate, UpgradeType type)
         {
             Id = id;
             Name = name;
             UpgradePrice = price;
-            Income = income;
-            GrowthRate = growthRate;
+            _incomePerLvl = incomePerLvl;
+            _growthRate = growthRate;
+            Type = type;
         }
 
-        public UpgradeModel(string name, BigNumber price, BigNumber income, float growthRate)
-            : this(0, name, price, income, growthRate)
+        public void UpgradeLvl()
         {
+            UpgradePrice *= _growthRate;
+            Lvl++;
         }
     }
 }
