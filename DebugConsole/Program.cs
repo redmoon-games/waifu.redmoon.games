@@ -11,8 +11,8 @@ namespace DebugConsole
     {
         static void Main(string[] args)
         {
-            ITeam firstTeam = new RemTeam();
-            ITeam secondTeam = new RemTeam();
+            ITeam firstTeam = new RemTeam("First Team");
+            ITeam secondTeam = new RemTeam("Second Team");
             ITournament tournament = new VSTournament(firstTeam, secondTeam);
 
             IPlayer newPlayer1 = new WebPlayer("saha1506");
@@ -23,13 +23,13 @@ namespace DebugConsole
 
             AddInstantMoney(newPlayer1, new BigNumber(1, 5));
             PurchaseUpdateFor(newPlayer1, 100);
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 10; i++)
                 PressClick(newPlayer1);
             WaitFor(100f, newPlayer1);
 
             AddInstantMoney(newPlayer2, new BigNumber(1, 4));
             PurchaseUpdateFor(newPlayer2, 100);
-            for (int i = 0; i < 1000; i++)
+            for (int i = 0; i < 100; i++)
                 PressClick(newPlayer2);
             WaitFor(1000f, newPlayer1);
 

@@ -5,7 +5,7 @@ using TournamentLibrary.Models;
 
 namespace TournamentLibrary.UpdateSystem
 {
-    public abstract class UpgradesBundle : IUpgradesBundle
+    public class UpgradesBundle : IUpgradesBundle
     {
         public UpgradeItem[] Upgrades { get; }
         public BigNumber MoneyPerClick

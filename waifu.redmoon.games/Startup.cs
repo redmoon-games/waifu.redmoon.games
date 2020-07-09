@@ -10,6 +10,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using TournamentLibrary.Models;
+using TournamentLibrary.Player;
+using TournamentLibrary.Rewards;
+using TournamentLibrary.Team;
 using waifu.redmoon.games.Data;
 
 namespace waifu.redmoon.games
@@ -30,14 +33,10 @@ namespace waifu.redmoon.games
             services.AddRazorPages();
             services.AddServerSideBlazor();
 
-            ITeam firstTeam = new RemTeam();
-            ITeam secondTeam = new SecondTead();
-            ITeam Rem = new SummerTeam("Ðýì");
+            ITeam firstTeam = new RemTeam("First Team");
+            ITeam secondTeam = new RemTeam("SEcond Team");
 
-            services.AddScoped<ITournament>(x => new VSTournament(Zui, Rem));
-
-            //services.AddTransient<ITeam>(x => new SummerTeam(Guid.NewGuid().ToString()));
-            services.AddSingleton<ITournament>(x => new VSTournament(Zui, Rem));
+            services.AddSingleton<ITournament>(x => new VSTournament(firstTeam, secondTeam));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -72,16 +71,57 @@ namespace waifu.redmoon.games
         {
             app.Use(async (context, next) =>
             {
-                ITournament tournament = app.ApplicationServices.GetRequiredService<ITournament>();
-                ITeam Asui = new SummerTeam("Àñóè");
-                ITeam Rem = new SummerTeam("Àñóè");
-                ITournament tournament1 = app.ApplicationServices.GetRequiredService<ITournament>();
-                IPlayer newPlayer = new Player("saha1506");
-                IPlayer newPlayer2 = new Player("ZaBiAVaKa");
-                tournament.AddPlayer(newPlayer, Asui);
-                tournament1.AddPlayer(newPlayer2, Rem);
+                ITeam firstTeam = new RemTeam("First Team");
+                ITeam secondTeam = new RemTeam("Second Team");
+                ITournament tournament = new VSTournament(firstTeam, secondTeam);
+
+                IPlayer newPlayer1 = new WebPlayer("saha1506");
+                IPlayer newPlayer2 = new WebPlayer("BIG BOSS");
+
+                firstTeam.AddPlayer(newPlayer1);
+                secondTeam.AddPlayer(newPlayer2);
+
+                AddInstantMoney(newPlayer1, new BigNumber(1, 5));
+                PurchaseUpdateFor(newPlayer1, 100);
+                for (int i = 0; i < 100; i++)
+                    PressClick(newPlayer1);
+                WaitFor(100f, newPlayer1);
+
+                AddInstantMoney(newPlayer2, new BigNumber(1, 4));
+                PurchaseUpdateFor(newPlayer2, 100);
+                for (int i = 0; i < 1000; i++)
+                    PressClick(newPlayer2);
+                WaitFor(1000f, newPlayer1);
+
+                Console.WriteLine(tournament);
                 await next.Invoke();
             });
+        }
+        private static void WaitFor(float seconds, IPlayer player)
+        {
+            player.AddReward(new TimeReward(player.Upgrades, seconds));
+        }
+
+        private static void AddInstantMoney(IPlayer newPlayer, BigNumber money)
+        {
+            newPlayer.AddReward(new InstantMoneyReward(money));
+        }
+        private static void PressClick(IPlayer newPlayer)
+        {
+            var reward = new ClickReward(newPlayer.Upgrades.MoneyPerClick);
+            newPlayer.AddReward(reward);
+        }
+        private static void PurchaseUpdateFor(IPlayer player, int count)
+        {
+            var upgradeToLvlUp = player.Upgrades.Upgrades[0];
+
+            for (int i = 0; i < count; i++)
+            {
+                if (player.CanPay(upgradeToLvlUp.Price))
+                    player.BuyUgrade(upgradeToLvlUp);
+                else
+                    Console.WriteLine($"{ player.ProfileInfo.Login }: need mor money!");
+            }
         }
     }
 }

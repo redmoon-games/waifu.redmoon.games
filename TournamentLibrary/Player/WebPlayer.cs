@@ -10,7 +10,7 @@ namespace TournamentLibrary.Player
     {
 
         public WebPlayer(string login) : base(new WebPlayerProfile(login),
-                                              new RemUpgrades(),
+                                              null,
                                               new PlayerMoney())
         {
 

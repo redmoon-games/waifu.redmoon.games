@@ -15,12 +15,12 @@ namespace TournamentLibrary.Player
 {
     public abstract class Player : IPlayer
     {
-        public IPlayerProfile ProfileInfo { get; }
+        public IPlayerProfile ProfileInfo { get; set; }
         public BigNumber CurrentBalance { get { return _moneySystem.Money; } }
-        public IUpgradesBundle Upgrades { get; internal set; }
+        public IUpgradesBundle Upgrades { get; set; }
+        public ITeam Team { get; set; }
 
         private IMoneySystem _moneySystem;
-        private IPlayerAnalitics _playerAnalitics;
 
         public Player(
             IPlayerProfile playeProfile,
@@ -30,12 +30,14 @@ namespace TournamentLibrary.Player
             ProfileInfo = playeProfile;
             Upgrades = playerUpgradesBundle;
             _moneySystem = playerMoneySystem;
-            _playerAnalitics = new PlayerAnalitics();
         }
 
         public void AddReward(IMoneyReward reward)
         {
-            _moneySystem.AddMoney(reward.MoneyToAdd);
+            var moneyToAdd = reward.MoneyToAdd;
+            _moneySystem.AddMoney(moneyToAdd);
+            if (Team != null)
+                Team.AddScore(moneyToAdd);
         }
 
         public void BuyUgrade(UpgradeItem itemToUpdate)

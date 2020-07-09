@@ -10,13 +10,11 @@ namespace TournamentLibrary.Models
     {
         public ITeam[] Teams { get; private set; }
         public DateTime StartTime { get; }
-        public List<IPlayer> Players { get; }
 
         public Tournament(ITeam[] teams)
         {
             StartTime = DateTime.Now;
             Teams = teams;
-            Players = new List<IPlayer>();
         }
 
         public virtual ITeam GetTopTeam()
@@ -28,12 +26,6 @@ namespace TournamentLibrary.Models
                     topTeam = Teams[i];
             }
             return topTeam;
-        }
-
-        public void AddPlayer(IPlayer player, ITeam toTeam)
-        {
-            player.SetTeam(toTeam);
-            Players.Add(player);
         }
     }
 }

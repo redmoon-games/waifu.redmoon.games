@@ -9,25 +9,28 @@ namespace TournamentLibrary.Team
 {
     public abstract class Team : ITeam
     {
+        protected Team(string name, IUpgradesBundle upgradesBundle)
+        {
+            Name = name;
+            this._upgradesBundle = upgradesBundle;
+            TotalScore = BigNumber.Zero;
+            Players = new List<IPlayer>();
+        }
         public BigNumber TotalScore { get; private set; }
         public List<IPlayer> Players { get; private set; }
-
-        private string[] _rangsScheme;
-        private IUpgradesScheme _upgradesScheme;
-
-        protected Team()
-        {
-            Name = "No name team";
-            List<UpgradeModel> Upgrades = new List<UpgradeModel>();
-        }
-
         public string Name { get; }
+
+        private IUpgradesBundle _upgradesBundle;
+
 
         public void AddPlayer(IPlayer player)
         {
             Players.Add(player);
-            Player.SetUpgradesScheme(_upgradesScheme);
-            Player.SetRangsScheme(_rangsScheme);
+            player.Team = this;
+            player.Upgrades = _upgradesBundle;
+
+            // TO DO:
+            //Player.SetRangsScheme(_rangsScheme);
         }
 
         public void AddScore(BigNumber score)

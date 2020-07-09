@@ -16,6 +16,8 @@ namespace TournamentLibrary.UpdateSystem
 
         public UpgradeItem(IUpgradeScheme scheme, IncomeType type)
         {
+            if (scheme == null)
+                Console.WriteLine("WTF??");
             _scheme = scheme;
             IncomeType = type;
             Price = _scheme.StartPrice;
