@@ -2,7 +2,7 @@
 
 namespace TournamentLibrary.MoneySystem
 {
-    internal interface IMoneySystem
+    public interface IMoneySystem
     {
         BigNumber Money { get; }
 

@@ -7,7 +7,7 @@ namespace TournamentLibrary.UpdateSystem
 {
     public abstract class UpgradesBundle : IUpgradesBundle
     {
-        public UpgradeModel[] Upgrades { get; }
+        public UpgradeItem[] Upgrades { get; }
         public BigNumber MoneyPerClick
         {
             get
@@ -15,7 +15,7 @@ namespace TournamentLibrary.UpdateSystem
                 BigNumber moneyPerSec = BigNumber.Zero;
                 foreach (var upgrade in Upgrades)
                 {
-                    if (upgrade.Type == UpgradeType.PerClick)
+                    if (upgrade.IncomeType == IncomeType.PerClick)
                         moneyPerSec += upgrade.Income;
                 }
                 return moneyPerSec;
@@ -28,14 +28,14 @@ namespace TournamentLibrary.UpdateSystem
                 BigNumber moneyPerSec = BigNumber.Zero;
                 foreach (var upgrade in Upgrades)
                 {
-                    if (upgrade.Type == UpgradeType.PerSec)
+                    if (upgrade.IncomeType == IncomeType.PerSec)
                         moneyPerSec += upgrade.Income;
                 }
                 return moneyPerSec;
             }
         }
 
-        public UpgradesBundle(UpgradeModel[] upgrades)
+        public UpgradesBundle(UpgradeItem[] upgrades)
         {
             Upgrades = upgrades;
         }
@@ -44,7 +44,7 @@ namespace TournamentLibrary.UpdateSystem
         {
             for (int i = 0; i < numberOfUpgrades; i++)
             {
-                Upgrades[updateId].UpgradeLvl();
+                Upgrades[updateId].LvlUp();
             }
         }
     }

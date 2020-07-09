@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TournamentLibrary.Player;
+using TournamentLibrary.Team;
 
 namespace TournamentLibrary.Models
 {

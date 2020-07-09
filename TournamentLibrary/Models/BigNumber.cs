@@ -183,7 +183,7 @@ namespace TournamentLibrary.Models
             {
                 return 0;
             }
-            else 
+            else
                 return -1;
         }
     }

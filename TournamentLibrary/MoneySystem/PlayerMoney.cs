@@ -5,7 +5,7 @@ using TournamentLibrary.Models;
 
 namespace TournamentLibrary.MoneySystem
 {
-    class PlayerMoney : IMoneySystem
+    public class PlayerMoney : IMoneySystem
     {
         public BigNumber Money { get; private set; }
 

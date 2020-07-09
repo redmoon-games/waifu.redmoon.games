@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace TournamentLibrary.Models
+namespace TournamentLibrary.Team
 {
     public class RemTeam : Team
     {

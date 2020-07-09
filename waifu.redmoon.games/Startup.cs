@@ -30,8 +30,12 @@ namespace waifu.redmoon.games
             services.AddRazorPages();
             services.AddServerSideBlazor();
 
+            ITeam firstTeam = new RemTeam();
+            ITeam secondTeam = new SecondTead();
             ITeam Rem = new SummerTeam("Ðýì");
-            ITeam Zui = new SummerTeam(Configuration.GetSection("TeamA").Get<TeamSettings>().Name);
+
+            services.AddScoped<ITournament>(x => new VSTournament(Zui, Rem));
+
             //services.AddTransient<ITeam>(x => new SummerTeam(Guid.NewGuid().ToString()));
             services.AddSingleton<ITournament>(x => new VSTournament(Zui, Rem));
         }

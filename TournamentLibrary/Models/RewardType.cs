@@ -9,5 +9,6 @@ namespace TournamentLibrary.Models
         Click,
         Second,
         Achievement,
+        InstantMoney,
     }
 }

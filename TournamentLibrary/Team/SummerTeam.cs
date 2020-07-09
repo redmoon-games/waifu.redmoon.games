@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TournamentLibrary.Models
+namespace TournamentLibrary.Team
 {
     public class SummerTeam : Team
     {

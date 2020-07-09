@@ -1,6 +1,6 @@
 ﻿namespace TournamentLibrary.UpdateSystem
 {
-    public enum UpgradeType
+    public enum IncomeType
     {
         PerClick,
         PerSec,
