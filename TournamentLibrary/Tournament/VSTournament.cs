@@ -9,6 +9,11 @@ namespace TournamentLibrary.Models
         public ITeam FirstTeam { get; }
         public ITeam SecondTeam { get; }
 
+        public VSTournament() : base(new ITeam[0])
+        {
+
+        }
+
         public VSTournament(ITeam firstTeam, ITeam secondTeam)
             : base(new ITeam[] { firstTeam, secondTeam })
         {

@@ -1,0 +1,27 @@
+﻿
+
+<button class="updates__item">
+    @if (Upgrade.IncomeType == IncomeType.PerSec)
+    {
+        <div class="updates__itemContent">
+            <img src="/img/bg-beach.png" alt="Alternate Text" />
+            <div class="clicker__price">@Upgrade.Price цена за шт.</div>
+            <div class="clicker__updateName">@Upgrade.Name</div>
+            <div class="clicker__price">@Upgrade.Income доход в сек</div>
+        </div>
+    }
+    else
+    {
+        <div class="updates__itemContent">
+            <img src="/img/bg-beach.png" alt="Alternate Text" />
+            <div class="clicker__price">@Upgrade.Price цена за шт.</div>
+            <div class="clicker__updateName">@Upgrade.Name</div>
+            <div class="clicker__price">@Upgrade.Income доход за клик</div>
+        </div>
+    }
+</button>
+
+@code {
+    [Parameter]
+    public IUpgradeItem Upgrade { get; set; }
+}

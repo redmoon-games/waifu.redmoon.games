@@ -1,20 +1,14 @@
-﻿@page "/"
-@using waifu.redmoon.games.Pages.Components
-<div class="bg">
-    <div class="bg__window">
-        <div class="promo hide">
-            <div class="promo__character">character</div>
-            <div class="promo__info">
-                <div class="info">
-                    <div class="info__header">Пляжная битва</div>
-                    <div class="info__text">Добро пожаловать на “Пляжную битву”. Мы занимаемся подсчётом рейтинга лучших девочек лета 2020. Присоединяйся и учатсвуй в голосовании!</div>
-                    <button class="info__button--blue">Посмотреть рейтинг</button>
-                    <button class="info__button--green">Начать сражение</button>
-                </div>
-            </div>
-        </div>
+﻿
+@inherits GameWindowLogic
 
-        <div class="game">
+    <div class="game">
+        @(Player.Team = Tournament.Teams[0])
+        @if (Player.Team == null)
+        {
+            <p>Сначала вступите в команду!</p>
+        }
+        else
+        {
             <div class="game__header">
                 <div class="game__title">Пляжная битва 2020 от Redmoon Games</div>
                 <div class="game__menu">
@@ -30,7 +24,7 @@
                         <AnalitycsComp></AnalitycsComp>
                         break;
                     case OptionType.clicker:
-                        <ClickerComp></ClickerComp>
+                        <ClickerComp />
                         break;
                     case OptionType.account:
                         <AccountComp></AccountComp>
@@ -41,10 +35,5 @@
                         break;
                 }
             </div>
-        </div>
+        }
     </div>
-</div>
-
-@code {
-    OptionType option = OptionType.clicker;
-}

@@ -6,7 +6,7 @@ namespace TournamentLibrary.UpdateSystem
     {
         BigNumber MoneyPerClick { get; }
         BigNumber MoneyPerSec { get; }
-        UpgradeItem[] Upgrades { get; }
+        UpgradeItem[] Bundle { get; }
 
         void AddLvlToUpgrade(int updateId, int numberOfUpgrades = 1);
     }

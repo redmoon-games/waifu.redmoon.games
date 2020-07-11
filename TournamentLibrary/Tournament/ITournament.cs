@@ -8,6 +8,7 @@ namespace TournamentLibrary.Models
         DateTime StartTime { get; }
         ITeam[] Teams { get; }
 
+        void AddTeam(ITeam newTeam);
         ITeam GetTopTeam();
     }
 }

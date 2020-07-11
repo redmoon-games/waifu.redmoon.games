@@ -2,8 +2,9 @@
 
 namespace TournamentLibrary.UpdateSystem
 {
-    internal interface IUpgradeItem
+    public interface IUpgradeItem
     {
+        string Name { get; }
         BigNumber Income { get; }
         IncomeType IncomeType { get; }
         int Lvl { get; }

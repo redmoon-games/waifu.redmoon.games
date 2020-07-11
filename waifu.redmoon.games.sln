@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TournamentLibrary", "Tourna
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DebugConsole", "DebugConsole\DebugConsole.csproj", "{7CB4FEF3-C34B-4B3B-B8AF-62F22BA935EE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WaifuBlazorLibrary", "WaifuBlazorLibrary\WaifuBlazorLibrary.csproj", "{3B7CFABE-6818-4F42-91B2-858EB595FDEF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{7CB4FEF3-C34B-4B3B-B8AF-62F22BA935EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7CB4FEF3-C34B-4B3B-B8AF-62F22BA935EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7CB4FEF3-C34B-4B3B-B8AF-62F22BA935EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B7CFABE-6818-4F42-91B2-858EB595FDEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B7CFABE-6818-4F42-91B2-858EB595FDEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B7CFABE-6818-4F42-91B2-858EB595FDEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B7CFABE-6818-4F42-91B2-858EB595FDEF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

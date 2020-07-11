@@ -1,0 +1,58 @@
+﻿@using waifu.redmoon.games.Pages.Game.Mini_Components
+<div class="bodyPanel">
+    <div class="bodyPanel__leftSide">
+        <div class="clicker__tap">
+            <button>
+                <img src="img/asui-color-1.png" alt="Asui" />
+                <p>TAP</p>
+            </button>
+        </div>
+    </div>
+    <div class="bodyPanel__rightSide">
+        <div class="clicker">
+            <div class="clicker__stats">
+                <div class="textHolder textHolder--medium">
+                    <div class="textHolder__description">
+                        Текущий ранг:
+                    </div>
+                    <div class="textHolder__content">
+                        "No rang"
+                    </div>
+                </div>
+                <div class="textHolder textHolder--medium">
+                    <div class="textHolder__description">
+                        Текущий баланс:
+                    </div>
+                    <div class="textHolder__content">
+                        @Player.CurrentBalance.Amount
+                    </div>
+                </div>
+                <div class="textHolder textHolder--medium">
+                    <div class="textHolder__description">
+                        Пасивный доход:
+                    </div>
+                    <div class="textHolder__content">
+                        @Player.CurrentBalance.Amount / сек
+                    </div>
+                </div>
+            </div>
+            <div class="updates">
+                <p>Цена  /  Название  / доход в сек</p>
+                <div class="updates__list">
+                    @for (int i = 0; i < Player.Upgrades.Bundle.Length; i++)
+                    {
+                        <UpgradeItem Upgrade="Player.Upgrades.Bundle[i]"/>
+                    }
+                </div>
+            </div>
+            <button class="updates__megaUpdate">
+                Повысить ранг за 999,9М
+            </button>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Inject]
+    public IPlayer Player { get; set; }
+}

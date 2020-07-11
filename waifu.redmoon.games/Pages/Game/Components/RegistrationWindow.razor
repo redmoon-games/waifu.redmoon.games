@@ -1,0 +1,34 @@
+﻿@using TournamentLibrary.Player;
+
+<div class="registration">
+    <div class="registration__sprite">character</div>
+    <div class="registration__info">
+        <h3>Пляжная битва @go</h3>
+        <p>Добро пожаловать на “Пляжную битву”. Мы занимаемся подсчётом рейтинга лучших девочек лета 2020. Присоединяйся и учатсвуй в голосовании!</p>
+        <div class="info__buttons">
+            <button class="registration__button">Посмотреть рейтинг</button>
+            <button class="registration__button" @onclick="FastLogin">Начать сражение</button>
+        </div>
+    </div>
+</div>
+
+@code {
+
+    [Inject]
+    public IPlayer Player { get; set; }
+    [Inject]
+    public ITournament Tournament { get; set; }
+    [Parameter]
+    public EventCallback<bool> OnReadyButtonPressed { get; set; }
+
+    string go = "";
+
+    public void FastLogin()
+    {
+        Player = new WebPlayer("RandomUser1234");
+        Tournament.Teams[0].AddPlayer(Player);
+        Player.Team = Tournament.Teams[0];
+
+        OnReadyButtonPressed.InvokeAsync(true);
+    }
+}

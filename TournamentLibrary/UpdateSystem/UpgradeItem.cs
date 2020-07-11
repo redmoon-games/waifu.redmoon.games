@@ -11,6 +11,7 @@ namespace TournamentLibrary.UpdateSystem
         public IncomeType IncomeType { get; }
         public int Lvl { get; private set; }
         public BigNumber Price { get; private set; }
+        public string Name => _scheme.Name;
 
         private IUpgradeScheme _scheme;
 

@@ -1,0 +1,19 @@
+﻿@page "/"
+@using waifu.redmoon.games.Pages.Game.Components
+@inherits IndexLogic
+
+<div class="bg">
+    <div class="bg__window">
+
+        @if (IsLogged)
+        {
+            <GameWindow />
+        }
+        else
+        {
+            <RegistrationWindow OnReadyButtonPressed="OnPlayerReady"/>
+        }
+
+
+    </div>
+</div>

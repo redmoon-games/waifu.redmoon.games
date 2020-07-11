@@ -53,7 +53,7 @@ namespace DebugConsole
         }
         private static void PurchaseUpdateFor(IPlayer player, int count)
         {
-            var upgradeToLvlUp = player.Upgrades.Upgrades[0];
+            var upgradeToLvlUp = player.Upgrades.Bundle[0];
 
             for (int i = 0; i < count; i++)
             {
