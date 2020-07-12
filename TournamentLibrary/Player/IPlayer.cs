@@ -13,7 +13,7 @@ namespace TournamentLibrary.Player
         ITeam Team { get; set; }
 
         void AddReward(IMoneyReward reward);
-        void BuyUgrade(UpgradeItem itemToUpdate);
+        void BuyUgrade(IUpgradeItem itemToUpdate);
         bool CanPay(BigNumber fullCost);
     }
 }

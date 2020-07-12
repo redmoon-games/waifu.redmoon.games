@@ -12,13 +12,13 @@ namespace TournamentLibrary.UpdateSystem
         {
             get
             {
-                BigNumber moneyPerSec = BigNumber.Zero;
+                BigNumber moneyPerClick = BigNumber.Zero;
                 foreach (var upgrade in Bundle)
                 {
                     if (upgrade.IncomeType == IncomeType.PerClick)
-                        moneyPerSec += upgrade.Income;
+                        moneyPerClick += upgrade.Income;
                 }
-                return moneyPerSec;
+                return moneyPerClick;
             }
         }
         public BigNumber MoneyPerSec

@@ -1,6 +1,6 @@
 ﻿
 
-<button class="updates__item">
+<button class="updates__item" @onclick="BuyUpgrade">
     @if (Upgrade.IncomeType == IncomeType.PerSec)
     {
         <div class="updates__itemContent">
@@ -19,9 +19,27 @@
             <div class="clicker__price">@Upgrade.Income доход за клик</div>
         </div>
     }
+    <p>@error</p>
 </button>
 
 @code {
     [Parameter]
     public IUpgradeItem Upgrade { get; set; }
+    [Parameter]
+    public IPlayer Player { get; set; }
+
+    string error = "";
+
+    public void BuyUpgrade()
+    {
+        if (Player.CanPay(Upgrade.Price))
+        {
+            Player.BuyUgrade(Upgrade);
+            error = "";
+        }
+        else
+        {
+            error = "Player cant pay: " + Upgrade.Price;
+        }
+    }
 }

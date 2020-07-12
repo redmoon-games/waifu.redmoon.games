@@ -8,7 +8,12 @@ namespace TournamentLibrary.Models
     public struct BigNumber : IEquatable<BigNumber>, IComparable<BigNumber>
     {
         public float Amount { get { return _amount; } }
-        public int Discharge { get { return _discharge; } }
+        public int Discharge { get {
+                if (Amount < 0.000001)
+                {
+                    _discharge = 0;
+                }
+                return _discharge; } }
 
         public static BigNumber Zero = new BigNumber(0, 0);
         public static BigNumber One = new BigNumber(1, 0);

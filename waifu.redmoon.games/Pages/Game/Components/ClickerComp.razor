@@ -26,7 +26,7 @@
                         Текущий баланс:
                     </div>
                     <div class="textHolder__content">
-                        @Player.CurrentBalance.Amount
+                        @Player.CurrentBalance
                     </div>
                 </div>
                 <div class="textHolder textHolder--medium">
@@ -34,7 +34,7 @@
                         Пасивный доход:
                     </div>
                     <div class="textHolder__content">
-                        @Player.CurrentBalance.Amount / сек
+                        @Player.CurrentBalance / сек
                     </div>
                 </div>
             </div>
@@ -43,7 +43,8 @@
                 <div class="updates__list">
                     @for (int i = 0; i < Player.Upgrades.Bundle.Length; i++)
                     {
-                        <UpgradeItemComp Upgrade="Player.Upgrades.Bundle[i]"/>
+                        <UpgradeItemComp Upgrade="Player.Upgrades.Bundle[i]"
+                                         Player="Player"/>
                     }
                 </div>
             </div>
@@ -53,3 +54,5 @@
         </div>
     </div>
 </div>
+
+<h3>money per sec: @MoneyPerSec</h3>

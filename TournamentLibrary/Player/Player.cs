@@ -46,7 +46,7 @@ namespace TournamentLibrary.Player
                 Team.AddScore(moneyToAdd);
         }
 
-        public void BuyUgrade(UpgradeItem itemToUpdate)
+        public void BuyUgrade(IUpgradeItem itemToUpdate)
         {
             BigNumber updateCost = itemToUpdate.Price;
 
@@ -59,7 +59,7 @@ namespace TournamentLibrary.Player
 
         public bool CanPay(BigNumber fullCost)
         {
-            return _moneySystem.Money < fullCost;
+            return _moneySystem.Money > fullCost;
         }
     }
 }

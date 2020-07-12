@@ -17,34 +17,33 @@ namespace waifu.redmoon.games.Pages.Game.Components
         [Inject]
         public TimerService Timer { get; set; }
 
+        private const int TICK_SPEED = 1000;
+
+        public string MoneyPerSec { get { 
+                return new TimeReward(Player.Upgrades, 1).MoneyToAdd.Amount.ToString(); 
+            } }
+
         protected override void OnInitialized()
         {
             base.OnInitialized();
-            Timer.SetTimer(1000);
             Timer.OnElapsed += TickHandle;
+            Timer.SetTimer(TICK_SPEED);
         }
 
-        protected override async Task OnInitializedAsync()
+        public void СlickHandle()
         {
-            base.OnInitialized();
-            Timer.SetTimer(1000);
-            Timer.OnElapsed += TickHandle;
-        }
-
-        public async Task СlickHandle()
-        {
-            StateHasChanged();
-            BigNumber moneyPerClick = BigNumber.One;
+            BigNumber moneyPerClick = BigNumber.One + Player.Upgrades.MoneyPerClick;
             IMoneyReward clickReward = new ClickReward(moneyPerClick);
             Player.AddReward(clickReward);
         }
 
         public void TickHandle()
         {
-            IMoneyReward clickReward = new ClickReward(new BigNumber(10, 1));
-            Player.AddReward(clickReward);
-            Timer.SetTimer(1000);
-            Timer.OnElapsed += TickHandle;
+            IMoneyReward timeReward = new TimeReward(Player.Upgrades, TICK_SPEED / 1000);
+            Player.AddReward(timeReward);
+
+            Timer.SetTimer(TICK_SPEED);
+            InvokeAsync(StateHasChanged);
         }
     }
 }
