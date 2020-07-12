@@ -12,7 +12,7 @@ namespace TournamentLibrary.Team
         protected Team(string name, IUpgradesBundle upgradesBundle)
         {
             Name = name;
-            this._upgradesBundle = upgradesBundle;
+            UpgradesBundle = upgradesBundle;
             TotalScore = BigNumber.Zero;
             Players = new List<IPlayer>();
         }
@@ -20,14 +20,13 @@ namespace TournamentLibrary.Team
         public List<IPlayer> Players { get; private set; }
         public string Name { get; }
 
-        private IUpgradesBundle _upgradesBundle;
+        public IUpgradesBundle UpgradesBundle { get; }
 
 
         public void AddPlayer(IPlayer player)
         {
             Players.Add(player);
             player.Team = this;
-            player.Upgrades = _upgradesBundle;
 
             // TO DO:
             //Player.SetRangsScheme(_rangsScheme);

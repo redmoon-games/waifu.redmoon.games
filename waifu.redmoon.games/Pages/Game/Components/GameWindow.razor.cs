@@ -10,7 +10,7 @@ namespace waifu.redmoon.games.Pages.Game.Components
 {
     public class GameWindowLogic : ComponentBase
     {
-        [Inject]
+        [Parameter]
         public IPlayer Player { get; set; }
         [Inject]
         public ITournament Tournament { get; set; }

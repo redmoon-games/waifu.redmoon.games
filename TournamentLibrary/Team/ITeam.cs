@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using TournamentLibrary.AnaliticsSystem;
 using TournamentLibrary.Models;
 using TournamentLibrary.Player;
+using TournamentLibrary.UpdateSystem;
 
 namespace TournamentLibrary.Team
 {
@@ -10,6 +10,7 @@ namespace TournamentLibrary.Team
         string Name { get; }
         List<IPlayer> Players { get; }
         BigNumber TotalScore { get; }
+        IUpgradesBundle UpgradesBundle { get; }
 
         void AddPlayer(IPlayer player);
         void AddScore(BigNumber score);

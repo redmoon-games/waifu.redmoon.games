@@ -1,8 +1,10 @@
 ﻿@using waifu.redmoon.games.Pages.Game.Mini_Components
+@inherits ClickerCompLogic
+
 <div class="bodyPanel">
     <div class="bodyPanel__leftSide">
         <div class="clicker__tap">
-            <button>
+            <button @onclick="СlickHandle">
                 <img src="img/asui-color-1.png" alt="Asui" />
                 <p>TAP</p>
             </button>
@@ -41,7 +43,7 @@
                 <div class="updates__list">
                     @for (int i = 0; i < Player.Upgrades.Bundle.Length; i++)
                     {
-                        <UpgradeItem Upgrade="Player.Upgrades.Bundle[i]"/>
+                        <UpgradeItemComp Upgrade="Player.Upgrades.Bundle[i]"/>
                     }
                 </div>
             </div>
@@ -51,8 +53,3 @@
         </div>
     </div>
 </div>
-
-@code {
-    [Inject]
-    public IPlayer Player { get; set; }
-}

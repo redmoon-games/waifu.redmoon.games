@@ -17,6 +17,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Blazored.LocalStorage" Version="2.1.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LocalStorageLibrary\LocalStorageLibrary.csproj" />
     <ProjectReference Include="..\TournamentLibrary\TournamentLibrary.csproj" />
   </ItemGroup>
 

@@ -8,8 +8,8 @@ namespace TournamentLibrary.Player
     public interface IPlayer
     {
         BigNumber CurrentBalance { get; }
-        IPlayerProfile ProfileInfo { get; set; }
-        IUpgradesBundle Upgrades { get; set; }
+        IPlayerProfile ProfileInfo { get; }
+        IUpgradesBundle Upgrades { get; }
         ITeam Team { get; set; }
 
         void AddReward(IMoneyReward reward);

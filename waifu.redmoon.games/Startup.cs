@@ -14,6 +14,8 @@ using TournamentLibrary.Player;
 using TournamentLibrary.Rewards;
 using TournamentLibrary.Team;
 using waifu.redmoon.games.Data;
+using Blazored.LocalStorage;
+using LocalStorageLibrary;
 
 namespace waifu.redmoon.games
 {
@@ -22,7 +24,7 @@ namespace waifu.redmoon.games
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-        } //NLog, Serilog, log4net
+        }   //NLog, Serilog, log4net
 
         public IConfiguration Configuration { get; }
 
@@ -33,10 +35,10 @@ namespace waifu.redmoon.games
             services.AddRazorPages();
             services.AddServerSideBlazor();
 
-            //services.AddSingleton<ITournament>(x => new VSTournament(firstTeam, secondTeam));
-            //services.AddScoped<IPlayer>(x => new WebPlayer("RANDOM_USER"));
             services.AddSingleton<ITournament, VSTournament>();
             services.AddScoped<IPlayer>(x => new WebPlayer("RANDOM_USER"));
+            services.AddBlazoredLocalStorage();
+            services.AddTransient<TimerService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

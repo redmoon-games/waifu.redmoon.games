@@ -1,39 +1,39 @@
 ﻿
 @inherits GameWindowLogic
 
-    <div class="game">
-        @(Player.Team = Tournament.Teams[0])
-        @if (Player.Team == null)
-        {
-            <p>Сначала вступите в команду!</p>
-        }
-        else
-        {
-            <div class="game__header">
-                <div class="game__title">Пляжная битва 2020 от Redmoon Games</div>
-                <div class="game__menu">
-                    <button @onclick="() => option = OptionType.analytics">Исход сражения</button>
-                    <button @onclick="() => option = OptionType.clicker">Соревнование</button>
-                    <button @onclick="() => option = OptionType.account">Личный кабинет</button>
-                </div>
+<div class="game">
+
+    @if (Player.Team == null)
+    {
+        <p>Сначала вступите в команду!</p>
+    }
+    else
+    {
+        <div class="game__header">
+            <div class="game__title">Пляжная битва 2020 от Redmoon Games</div>
+            <div class="game__menu">
+                <button @onclick="() => option = OptionType.analytics">Исход сражения</button>
+                <button @onclick="() => option = OptionType.clicker">Соревнование</button>
+                <button @onclick="() => option = OptionType.account">Личный кабинет</button>
             </div>
-            <div class="game__body">
-                @switch (option)
-                {
-                    case OptionType.analytics:
-                        <AnalitycsComp></AnalitycsComp>
-                        break;
-                    case OptionType.clicker:
-                        <ClickerComp />
-                        break;
-                    case OptionType.account:
-                        <AccountComp></AccountComp>
-                        break;
-                    case OptionType.none:
-                        break;
-                    default:
-                        break;
-                }
-            </div>
-        }
-    </div>
+        </div>
+        <div class="game__body">
+            @switch (option)
+            {
+                case OptionType.analytics:
+                    <AnalitycsComp Player="Player"/>
+                    break;
+                case OptionType.clicker:
+                    <ClickerComp Player="Player" />
+                    break;
+                case OptionType.account:
+                    <AccountComp Player="Player"/>
+                    break;
+                case OptionType.none:
+                    break;
+                default:
+                    break;
+            }
+        </div>
+    }
+</div>

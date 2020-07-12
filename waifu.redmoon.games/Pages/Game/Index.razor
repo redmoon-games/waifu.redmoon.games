@@ -5,15 +5,28 @@
 <div class="bg">
     <div class="bg__window">
 
-        @if (IsLogged)
+        @if (PlayerIsReady)
         {
-            <GameWindow />
+            <GameWindow Player="Player"/>
         }
         else
         {
-            <RegistrationWindow OnReadyButtonPressed="OnPlayerReady"/>
+            <RegistrationWindow Player="Player"
+                                ReloadParent="ReloadPage" />
         }
-
-
     </div>
+</div>
+
+<div style="border: 1px, solid, red; margin-top:25px;">
+    <h3>Player Info:</h3>
+    <p>Player Name : @Player.ProfileInfo.Login</p>
+    <p>Player Name : @Player.Team.Name</p>
+
+    <button @onclick="ResetLocalData">Reset user</button>
+
+    <h3>Current Teams:</h3>
+    @foreach (var tournamentTeam in Tournament.Teams)
+    {
+        <p>tournamentTeam: @tournamentTeam.Name</p>
+    }
 </div>

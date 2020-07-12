@@ -18,8 +18,14 @@ namespace TournamentLibrary.Player
         public IPlayerProfile ProfileInfo { get; set; }
         public BigNumber CurrentBalance { get { return _moneySystem.Money; } }
         public IUpgradesBundle Upgrades { get; set; }
-        public ITeam Team { get; set; }
+        public ITeam Team { 
+            get { return _team; } 
+            set {
+                _team = value;
+                Upgrades = _team.UpgradesBundle;
+            } }
 
+        private ITeam _team;
         private IMoneySystem _moneySystem;
 
         public Player(
