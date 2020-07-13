@@ -1,5 +1,4 @@
 ﻿using System;
-using TournamentLibrary.Team;
 
 namespace TournamentLibrary.Models
 {

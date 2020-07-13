@@ -1,13 +1,10 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using TournamentLibrary.Models;
-using TournamentLibrary.Player;
-using TournamentLibrary.Team;
 using LocalStorageLibrary;
 using Blazored.LocalStorage;
+using TournamentLibrary.CustomPlayer;
 
 namespace waifu.redmoon.games.Pages.Game
 {
@@ -59,7 +56,7 @@ namespace waifu.redmoon.games.Pages.Game
 
         private IPlayer GenerateProfile()
         {
-            return new WebPlayer($"RU{new Random().Next()}");
+            return new RemPlayer($"RU{new Random().Next()}");
         }
 
         public void ReloadPage(string hello)

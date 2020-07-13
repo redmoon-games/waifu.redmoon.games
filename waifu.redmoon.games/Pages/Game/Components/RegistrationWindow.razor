@@ -10,7 +10,7 @@
             <button class="registration__button">Посмотреть рейтинг</button>
             <button class="registration__button" @onclick="FastLogin">Начать сражение</button>
         </div>
-        <p>Login: @Player.ProfileInfo.Login</p>
+        <p>Login: @Player.ProfileInfo.Name</p>
         @if (Player.Team != null)
         {
             <p>Team: @Player.Team.Name</p>

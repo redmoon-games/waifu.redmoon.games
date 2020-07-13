@@ -4,38 +4,34 @@ using System.Data;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading;
-using TournamentLibrary.AnaliticsSystem;
+using TournamentLibrary.AchievementSys;
 using TournamentLibrary.Models;
-using TournamentLibrary.MoneySystem;
+using TournamentLibrary.MoneySys;
 using TournamentLibrary.Rewards;
-using TournamentLibrary.Team;
-using TournamentLibrary.UpdateSystem;
+using TournamentLibrary.UpgradeSys;
 
-namespace TournamentLibrary.Player
+namespace TournamentLibrary.Models
 {
     public abstract class Player : IPlayer
     {
-        public IPlayerProfile ProfileInfo { get; set; }
-        public BigNumber CurrentBalance { get { return _moneySystem.Money; } }
-        public IUpgradesBundle Upgrades { get; set; }
-        public ITeam Team { 
-            get { return _team; } 
-            set {
-                _team = value;
-                Upgrades = _team.UpgradesBundle;
-            } }
+        public BigNumber CurrentBalance => _moneySystem.Money;
+        public IPlayerProfile ProfileInfo { get; }
+        public IUpgradeSystem Upgrades { get; }
+        public IAchievementSystem Achievements { get; }
+        public ITeam Team { get; private set; }
 
-        private ITeam _team;
-        private IMoneySystem _moneySystem;
+        private readonly IMoneySystem _moneySystem;
 
         public Player(
             IPlayerProfile playeProfile,
-            IUpgradesBundle playerUpgradesBundle,
-            IMoneySystem playerMoneySystem)
+            IUpgradeSystem playerUpgradesBundle,
+            IMoneySystem playerMoneySystem,
+            IAchievementSystem achievementSystem)
         {
             ProfileInfo = playeProfile;
             Upgrades = playerUpgradesBundle;
             _moneySystem = playerMoneySystem;
+            Achievements = achievementSystem;
         }
 
         public void AddReward(IMoneyReward reward)
@@ -46,7 +42,7 @@ namespace TournamentLibrary.Player
                 Team.AddScore(moneyToAdd);
         }
 
-        public void BuyUgrade(IUpgradeItem itemToUpdate)
+        public void BuyUgrade(IUpgrade itemToUpdate)
         {
             BigNumber updateCost = itemToUpdate.Price;
 
@@ -55,6 +51,10 @@ namespace TournamentLibrary.Player
 
             _moneySystem.SubstructMoney(updateCost);
             itemToUpdate.LvlUp();
+        }
+        public void ChangeTeam(ITeam newTeam)
+        {
+            Team = newTeam;
         }
 
         public bool CanPay(BigNumber fullCost)

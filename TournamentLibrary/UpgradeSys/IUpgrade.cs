@@ -1,8 +1,8 @@
 ﻿using TournamentLibrary.Models;
 
-namespace TournamentLibrary.UpdateSystem
+namespace TournamentLibrary.UpgradeSys
 {
-    public interface IUpgradeItem
+    public interface IUpgrade
     {
         string Name { get; }
         BigNumber Income { get; }

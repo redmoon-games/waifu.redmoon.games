@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using TournamentLibrary.Models;
 
-namespace TournamentLibrary.UpdateSystem
+namespace TournamentLibrary.UpgradeSys
 {
-    public class UpgradeItem : IUpgradeItem
+    public class Upgrade : IUpgrade
     {
         public BigNumber Income => _scheme.IncomePerLvl * Lvl;
         public IncomeType IncomeType { get; }
@@ -13,9 +13,9 @@ namespace TournamentLibrary.UpdateSystem
         public BigNumber Price { get; private set; }
         public string Name => _scheme.Name;
 
-        private IUpgradeScheme _scheme;
+        private IScheme _scheme;
 
-        public UpgradeItem(IUpgradeScheme scheme, IncomeType type)
+        public Upgrade(IScheme scheme, IncomeType type)
         {
             if (scheme == null)
                 Console.WriteLine("WTF??");

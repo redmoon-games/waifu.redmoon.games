@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using TournamentLibrary.Team;
-
-namespace TournamentLibrary.Models
+﻿namespace TournamentLibrary.Models
 {
     sealed public class VSTournament : Tournament
     {

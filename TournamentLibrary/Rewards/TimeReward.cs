@@ -1,5 +1,5 @@
 ﻿using TournamentLibrary.Models;
-using TournamentLibrary.UpdateSystem;
+using TournamentLibrary.UpgradeSys;
 
 namespace TournamentLibrary.Rewards
 {
@@ -7,7 +7,7 @@ namespace TournamentLibrary.Rewards
     {
         public BigNumber MoneyToAdd { get; }
 
-        public TimeReward(IUpgradesBundle upgrades, float time)
+        public TimeReward(IUpgradeSystem upgrades, float time)
         {
             MoneyToAdd = upgrades.MoneyPerSec * time;
         }

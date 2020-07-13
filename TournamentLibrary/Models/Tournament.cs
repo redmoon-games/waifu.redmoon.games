@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TournamentLibrary.Player;
-using TournamentLibrary.Team;
 
 namespace TournamentLibrary.Models
 {
-    public abstract class Tournament : ITournament
+    public class Tournament : ITournament
     {
         public ITeam[] Teams { get; private set; }
         public DateTime StartTime { get; }

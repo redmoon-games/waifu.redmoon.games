@@ -1,9 +1,8 @@
 ﻿using System;
+using TournamentLibrary.CustomPlayer;
+using TournamentLibrary.CustomTeam;
 using TournamentLibrary.Models;
-using TournamentLibrary.MoneySystem;
-using TournamentLibrary.Player;
 using TournamentLibrary.Rewards;
-using TournamentLibrary.Team;
 
 namespace DebugConsole
 {
@@ -15,8 +14,8 @@ namespace DebugConsole
             ITeam secondTeam = new RemTeam("Second Team");
             ITournament tournament = new VSTournament(firstTeam, secondTeam);
 
-            IPlayer newPlayer1 = new WebPlayer("saha1506");
-            IPlayer newPlayer2 = new WebPlayer("BIG BOSS");
+            IPlayer newPlayer1 = new RemPlayer("saha1506");
+            IPlayer newPlayer2 = new RemPlayer("BIG BOSS");
 
             firstTeam.AddPlayer(newPlayer1);
             secondTeam.AddPlayer(newPlayer2);
@@ -60,7 +59,7 @@ namespace DebugConsole
                 if (player.CanPay(upgradeToLvlUp.Price))
                     player.BuyUgrade(upgradeToLvlUp);
                 else
-                    Console.WriteLine($"{ player.ProfileInfo.Login }: need mor money!");
+                    Console.WriteLine($"{ player.ProfileInfo.Name }: need mor money!");
             }
         }
     }

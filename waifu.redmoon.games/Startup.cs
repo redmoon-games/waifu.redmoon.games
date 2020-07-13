@@ -1,21 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using TournamentLibrary.Models;
-using TournamentLibrary.Player;
-using TournamentLibrary.Rewards;
-using TournamentLibrary.Team;
-using waifu.redmoon.games.Data;
 using Blazored.LocalStorage;
 using LocalStorageLibrary;
+using TournamentLibrary.CustomTeam;
+using TournamentLibrary.CustomPlayer;
 
 namespace waifu.redmoon.games
 {
@@ -36,7 +28,7 @@ namespace waifu.redmoon.games
             services.AddServerSideBlazor();
 
             services.AddSingleton<ITournament, VSTournament>();
-            services.AddScoped<IPlayer>(x => new WebPlayer("RANDOM_USER"));
+            services.AddScoped<IPlayer>(x => new RemPlayer("RANDOM_USER"));
             services.AddBlazoredLocalStorage();
             services.AddTransient<TimerService>();
         }

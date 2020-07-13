@@ -1,8 +1,8 @@
 ﻿using TournamentLibrary.Models;
 
-namespace TournamentLibrary.UpdateSystem
+namespace TournamentLibrary.UpgradeSys
 {
-    public interface IUpgradeScheme
+    public interface IScheme
     {
         float GrowthRate { get; }
         BigNumber IncomePerLvl { get; }

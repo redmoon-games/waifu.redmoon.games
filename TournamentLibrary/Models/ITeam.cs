@@ -1,16 +1,14 @@
 ﻿using System.Collections.Generic;
-using TournamentLibrary.Models;
-using TournamentLibrary.Player;
-using TournamentLibrary.UpdateSystem;
+using TournamentLibrary.UpgradeSys;
 
-namespace TournamentLibrary.Team
+namespace TournamentLibrary.Models
 {
     public interface ITeam
     {
         string Name { get; }
         List<IPlayer> Players { get; }
         BigNumber TotalScore { get; }
-        IUpgradesBundle UpgradesBundle { get; }
+        IUpgradeSystem UpgradesBundle { get; }
 
         void AddPlayer(IPlayer player);
         void AddScore(BigNumber score);

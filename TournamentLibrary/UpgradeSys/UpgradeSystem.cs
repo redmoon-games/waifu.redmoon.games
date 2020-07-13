@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 using TournamentLibrary.Models;
 
-namespace TournamentLibrary.UpdateSystem
+namespace TournamentLibrary.UpgradeSys
 {
-    public class UpgradesBundle : IUpgradesBundle
+    public class UpgradeSystem : IUpgradeSystem
     {
-        public UpgradeItem[] Bundle { get; }
+        public Upgrade[] Bundle { get; }
         public BigNumber MoneyPerClick
         {
             get
@@ -35,7 +35,7 @@ namespace TournamentLibrary.UpdateSystem
             }
         }
 
-        public UpgradesBundle(UpgradeItem[] upgrades)
+        public UpgradeSystem(Upgrade[] upgrades)
         {
             Bundle = upgrades;
         }

@@ -1,12 +1,12 @@
 ﻿using TournamentLibrary.Models;
 
-namespace TournamentLibrary.UpdateSystem
+namespace TournamentLibrary.UpgradeSys
 {
-    public interface IUpgradesBundle
+    public interface IUpgradeSystem
     {
         BigNumber MoneyPerClick { get; }
         BigNumber MoneyPerSec { get; }
-        UpgradeItem[] Bundle { get; }
+        Upgrade[] Bundle { get; }
 
         void AddLvlToUpgrade(int updateId, int numberOfUpgrades = 1);
     }

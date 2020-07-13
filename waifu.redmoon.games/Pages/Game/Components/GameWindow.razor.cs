@@ -1,10 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using TournamentLibrary.Models;
-using TournamentLibrary.Player;
 
 namespace waifu.redmoon.games.Pages.Game.Components
 {

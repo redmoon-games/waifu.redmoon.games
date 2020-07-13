@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TournamentLibrary", "Tourna
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DebugConsole", "DebugConsole\DebugConsole.csproj", "{7CB4FEF3-C34B-4B3B-B8AF-62F22BA935EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocalStorageLibrary", "LocalStorageLibrary\LocalStorageLibrary.csproj", "{034E8FB1-8AC3-4484-B124-BF61D9C27736}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocalStorageLibrary", "LocalStorageLibrary\LocalStorageLibrary.csproj", "{034E8FB1-8AC3-4484-B124-BF61D9C27736}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TournamentLibrary.Test", "TournamentLibrary.Test2\TournamentLibrary.Test.csproj", "{B631AADE-0DE1-4338-8E1E-2C78F439D83F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{034E8FB1-8AC3-4484-B124-BF61D9C27736}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{034E8FB1-8AC3-4484-B124-BF61D9C27736}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{034E8FB1-8AC3-4484-B124-BF61D9C27736}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B631AADE-0DE1-4338-8E1E-2C78F439D83F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B631AADE-0DE1-4338-8E1E-2C78F439D83F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B631AADE-0DE1-4338-8E1E-2C78F439D83F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B631AADE-0DE1-4338-8E1E-2C78F439D83F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

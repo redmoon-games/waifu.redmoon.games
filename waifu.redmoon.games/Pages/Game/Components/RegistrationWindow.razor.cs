@@ -1,11 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using TournamentLibrary.Models;
-using TournamentLibrary.Player;
-using TournamentLibrary.Team;
 
 namespace waifu.redmoon.games.Pages.Game.Components
 {
@@ -32,7 +26,7 @@ namespace waifu.redmoon.games.Pages.Game.Components
         public void SetPlayerTeam(ITeam team)
         {
             team.AddPlayer(Player);
-            Player.Team = team;
+            Player.ChangeTeam(team);
             go = "GOGOGOGOGGO!!!!";
         }
     }

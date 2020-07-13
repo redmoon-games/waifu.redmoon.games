@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using TournamentLibrary.Models;
 
-namespace TournamentLibrary.MoneySystem
+namespace TournamentLibrary.MoneySys
 {
     public class PlayerMoney : IMoneySystem
     {

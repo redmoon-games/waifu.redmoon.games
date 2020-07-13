@@ -1,6 +1,6 @@
 ﻿using TournamentLibrary.Models;
 
-namespace TournamentLibrary.MoneySystem
+namespace TournamentLibrary.MoneySys
 {
     public interface IMoneySystem
     {

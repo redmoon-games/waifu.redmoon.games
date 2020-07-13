@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using TournamentLibrary.Player;
+using TournamentLibrary.Models;
 
 namespace LocalStorageLibrary
 {
