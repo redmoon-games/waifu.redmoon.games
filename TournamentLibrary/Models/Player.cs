@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading;
 using TournamentLibrary.AchievementSys;
+using TournamentLibrary.CustomTeam;
 using TournamentLibrary.Models;
 using TournamentLibrary.MoneySys;
 using TournamentLibrary.Rewards;
@@ -18,9 +19,14 @@ namespace TournamentLibrary.Models
         public IPlayerProfile ProfileInfo { get; }
         public IUpgradeSystem Upgrades { get; }
         public IAchievementSystem Achievements { get; }
-        public ITeam Team { get; private set; }
+        public ITeam Team { 
+            get { 
+                return _team ?? new RemTeam("TEAM_IS_NULL"); 
+            }
+            private set { _team = value; } }
 
         private readonly IMoneySystem _moneySystem;
+        private ITeam _team;
 
         public Player(
             IPlayerProfile playeProfile,

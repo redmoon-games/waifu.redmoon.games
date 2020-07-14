@@ -19,10 +19,13 @@ namespace waifu.redmoon.games.Pages.Game
         public bool PlayerIsReady { 
             get 
             {
-                foreach (var tournamentTeam in Tournament.Teams)
+                if (Player.Team != null)
                 {
-                    if (Player.Team.Name == tournamentTeam.Name)
-                        return true;
+                    foreach (var tournamentTeam in Tournament.Teams)
+                    {
+                        if (Player.Team.Name == tournamentTeam.Name)
+                            return true;
+                    }
                 }
                 return false;
             } }

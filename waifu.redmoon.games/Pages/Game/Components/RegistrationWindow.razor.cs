@@ -1,4 +1,9 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Blazored.LocalStorage;
+using LocalStorageLibrary;
+using Microsoft.AspNetCore.Components;
+using System;
+using System.Threading.Tasks;
+using TournamentLibrary.CustomTeam;
 using TournamentLibrary.Models;
 
 namespace waifu.redmoon.games.Pages.Game.Components
@@ -8,26 +13,32 @@ namespace waifu.redmoon.games.Pages.Game.Components
         [Parameter]
         public IPlayer Player { get; set; }
         [Parameter]
-        public EventCallback<string> ReloadParent { get; set; }
-        [Inject]
         public ITournament Tournament { get; set; }
+        [Parameter]
+        public ILocalStorageService LocalStorageService { get; set; }
+        [Parameter]
+        public EventCallback<string> ReloadParent { get; set; }
 
-        public string go = "";
 
         public void FastLogin()
         {
-            ITeam playerTeam = Tournament.Teams[0];
-            SetPlayerTeam(playerTeam);
+            Player.ChangeTeam(new RemTeam("Hot Beans #1"));
 
-            StateHasChanged();
-            ReloadParent.InvokeAsync("Hello from child");
+            //SetPlayerTeam(Tournament.Teams[0]);
+            //await SavePlayerDataToLocal();
+            //StateHasChanged();
         }
 
         public void SetPlayerTeam(ITeam team)
         {
             team.AddPlayer(Player);
             Player.ChangeTeam(team);
-            go = "GOGOGOGOGGO!!!!";
+        }
+
+        private async Task SavePlayerDataToLocal()
+        {
+            PlayerLocalData localData = new PlayerLocalData(LocalStorageService);
+            await localData.SaveAsync(Player);
         }
     }
 }

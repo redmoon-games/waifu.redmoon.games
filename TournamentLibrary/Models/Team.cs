@@ -5,7 +5,7 @@ namespace TournamentLibrary.Models
 {
     public class Team : ITeam
     {
-        protected Team(string name, IUpgradeSystem upgradesBundle)
+        public Team(string name, IUpgradeSystem upgradesBundle)
         {
             Name = name;
             UpgradesBundle = upgradesBundle;

@@ -12,6 +12,8 @@
         else
         {
             <RegistrationWindow Player="Player"
+                                Tournament="Tournament"
+                                LocalStorageService="LocalStorageService"
                                 ReloadParent="ReloadPage" />
         }
     </div>
@@ -28,5 +30,17 @@
     @foreach (var tournamentTeam in Tournament.Teams)
     {
         <p>tournamentTeam: @tournamentTeam.Name</p>
+        if (tournamentTeam.Players.Count == 0)
+        {
+            <p>no players in team :(</p>
+        }
+        else
+        {
+            foreach (var player in tournamentTeam.Players)
+            {
+                <p>player name: @player.ProfileInfo.Name</p>
+            }
+        }
+        <br />
     }
 </div>

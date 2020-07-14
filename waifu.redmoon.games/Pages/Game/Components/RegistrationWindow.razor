@@ -4,16 +4,12 @@
 <div class="registration">
     <div class="registration__sprite">character</div>
     <div class="registration__info">
-        <h3>Пляжная битва @go</h3>
+        <h3>Пляжная битва</h3>
         <p>Добро пожаловать на “Пляжную битву”. Мы занимаемся подсчётом рейтинга лучших девочек лета 2020. Присоединяйся и учатсвуй в голосовании!</p>
         <div class="info__buttons">
             <button class="registration__button">Посмотреть рейтинг</button>
             <button class="registration__button" @onclick="FastLogin">Начать сражение</button>
         </div>
-        <p>Login: @Player.ProfileInfo.Name</p>
-        @if (Player.Team != null)
-        {
-            <p>Team: @Player.Team.Name</p>
-        }
+        <p>Tournament first team: @Tournament.Teams[0].Name</p>
     </div>
 </div>

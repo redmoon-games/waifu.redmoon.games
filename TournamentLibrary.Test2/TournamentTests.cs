@@ -7,12 +7,12 @@ using TournamentLibrary.CustomTeam;
 using TournamentLibrary.Models;
 using Xunit;
 
-namespace TournamentLibrary.Test2
+namespace TournamentLibrary.Test
 {
-    public class TournamentTest
+    public class TournamentTests
     {
         [Fact]
-        public void Tournament_ShouldBeAbleToCompare()
+        public void Tournament_ShouldBeAbleToFindWinner()
         {
             ITeam teamA = new RemTeam("First team");
             teamA.AddScore(BigNumber.One);
@@ -24,13 +24,6 @@ namespace TournamentLibrary.Test2
             ITeam actual = tournament.GetTopTeam();
 
             Assert.Equal(expected, actual);
-        }
-
-        [Fact]
-        public void Tournament_1is1()
-        {
-
-            Assert.Equal(1, 1);
         }
     }
 }
