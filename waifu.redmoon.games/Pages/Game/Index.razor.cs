@@ -5,6 +5,7 @@ using TournamentLibrary.Models;
 using LocalStorageLibrary;
 using Blazored.LocalStorage;
 using TournamentLibrary.CustomPlayer;
+using System.Linq;
 
 namespace waifu.redmoon.games.Pages.Game
 {
@@ -16,19 +17,23 @@ namespace waifu.redmoon.games.Pages.Game
         public IPlayer Player { get; set; }
         [Inject]
         public ILocalStorageService LocalStorageService { get; set; }
-        public bool PlayerIsReady { 
-            get 
+        public bool PlayerIsReady
+        {
+            get
             {
-                if (Player.Team != null)
-                {
-                    foreach (var tournamentTeam in Tournament.Teams)
-                    {
-                        if (Player.Team.Name == tournamentTeam.Name)
-                            return true;
-                    }
-                }
-                return false;
-            } }
+                return Tournament.Teams
+                    .SelectMany(x => x.Players)
+                    .Any(x => x.ProfileInfo.Name == Player.ProfileInfo.Name);
+            }
+        }
+
+        public ITeam PlayerTeam
+        {
+            get
+            {
+                return Tournament.Teams.SingleOrDefault(x => x.Players.Contains(Player));
+            }
+        }
 
         private IPlayerLocalData _localData;
 
@@ -62,7 +67,7 @@ namespace waifu.redmoon.games.Pages.Game
             return new RemPlayer($"RU{new Random().Next()}");
         }
 
-        public void ReloadPage(string hello)
+        public void ReloadPage()
         {
             StateHasChanged();
         }

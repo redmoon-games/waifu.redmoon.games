@@ -1,5 +1,5 @@
-﻿using TournamentLibrary.AchievementSys;
-using TournamentLibrary.Models;
+﻿using System;
+using TournamentLibrary.AchievementSys;
 using TournamentLibrary.Rewards;
 using TournamentLibrary.UpgradeSys;
 
@@ -7,15 +7,15 @@ namespace TournamentLibrary.Models
 {
     public interface IPlayer
     {
+        IAchievementSystem Achievements { get; }
         BigNumber CurrentBalance { get; }
         IPlayerProfile ProfileInfo { get; }
         IUpgradeSystem Upgrades { get; }
-        IAchievementSystem Achievements { get; }
-        ITeam Team { get; }
 
-        void ChangeTeam(ITeam newTeam);
+        event EventHandler<PlayerEventArgs> PlayerHasBeenUpdated;
+
         void AddReward(IMoneyReward reward);
-        void BuyUgrade(IUpgrade itemToUpgrade);
-        bool CanPay(BigNumber priceToPay);
+        void BuyUgrade(IUpgrade itemToUpdate);
+        bool CanPay(BigNumber fullCost);
     }
 }

@@ -9,6 +9,8 @@ namespace waifu.redmoon.games.Pages.Game.Components
         public IPlayer Player { get; set; }
         [Inject]
         public ITournament Tournament { get; set; }
+        [Parameter]
+        public bool PlayerIsReady { get; set; }
 
         public OptionType option = OptionType.clicker;
 

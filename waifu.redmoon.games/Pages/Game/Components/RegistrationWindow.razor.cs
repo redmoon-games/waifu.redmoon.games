@@ -17,22 +17,14 @@ namespace waifu.redmoon.games.Pages.Game.Components
         [Parameter]
         public ILocalStorageService LocalStorageService { get; set; }
         [Parameter]
-        public EventCallback<string> ReloadParent { get; set; }
+        public EventCallback ReloadParent { get; set; }
 
 
-        public void FastLogin()
+        public async Task FastLogin()
         {
-            Player.ChangeTeam(new RemTeam("Hot Beans #1"));
-
-            //SetPlayerTeam(Tournament.Teams[0]);
-            //await SavePlayerDataToLocal();
-            //StateHasChanged();
-        }
-
-        public void SetPlayerTeam(ITeam team)
-        {
-            team.AddPlayer(Player);
-            Player.ChangeTeam(team);
+            Tournament.Teams[0].AddPlayer(Player);
+            await SavePlayerDataToLocal();
+            await ReloadParent.InvokeAsync(null);
         }
 
         private async Task SavePlayerDataToLocal()

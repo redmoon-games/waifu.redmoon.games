@@ -13,20 +13,31 @@ using TournamentLibrary.UpgradeSys;
 
 namespace TournamentLibrary.Models
 {
-    public abstract class Player : IPlayer
+    public abstract class Player : IPlayer, IEquatable<Player>
     {
         public BigNumber CurrentBalance => _moneySystem.Money;
         public IPlayerProfile ProfileInfo { get; }
-        public IUpgradeSystem Upgrades { get; }
+        public IUpgradeSystem Upgrades { get; internal set; }
         public IAchievementSystem Achievements { get; }
-        public ITeam Team { 
-            get { 
-                return _team ?? new RemTeam("TEAM_IS_NULL"); 
-            }
-            private set { _team = value; } }
 
         private readonly IMoneySystem _moneySystem;
-        private ITeam _team;
+
+        public event EventHandler<PlayerEventArgs> PlayerHasBeenUpdated;
+
+        private void OnPlayerHasBeenUpdated()
+        {
+            PlayerEventArgs playerEventArgs = new PlayerEventArgs();
+            playerEventArgs.Name = this.ProfileInfo.Name;
+            PlayerHasBeenUpdated?.Invoke(this, playerEventArgs);
+        }
+
+        private void OnPlayerHasBeenUpdated(BigNumber scoreToAdd)
+        {
+            PlayerEventArgs playerEventArgs = new PlayerEventArgs();
+            playerEventArgs.Name = this.ProfileInfo.Name;
+            playerEventArgs.MoneyToAdd = scoreToAdd;
+            PlayerHasBeenUpdated?.Invoke(this, playerEventArgs);
+        }
 
         public Player(
             IPlayerProfile playeProfile,
@@ -42,10 +53,10 @@ namespace TournamentLibrary.Models
 
         public void AddReward(IMoneyReward reward)
         {
-            var moneyToAdd = reward.MoneyToAdd;
+            BigNumber moneyToAdd = reward.MoneyToAdd;
+
             _moneySystem.AddMoney(moneyToAdd);
-            if (Team != null)
-                Team.AddScore(moneyToAdd);
+            OnPlayerHasBeenUpdated(moneyToAdd);
         }
 
         public void BuyUgrade(IUpgrade itemToUpdate)
@@ -58,14 +69,35 @@ namespace TournamentLibrary.Models
             _moneySystem.SubstructMoney(updateCost);
             itemToUpdate.LvlUp();
         }
-        public void ChangeTeam(ITeam newTeam)
-        {
-            Team = newTeam;
-        }
 
         public bool CanPay(BigNumber fullCost)
         {
             return _moneySystem.Money > fullCost;
+        }
+
+        public bool Equals(Player other)
+        {
+            return Equals((object)other);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if(obj is Player player)
+            {
+                return player.ProfileInfo.Name == this.ProfileInfo.Name;
+
+            }
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return this.ProfileInfo.Name.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return $"Name: {this.ProfileInfo.Name}, Money: {this.CurrentBalance}";
         }
     }
 }

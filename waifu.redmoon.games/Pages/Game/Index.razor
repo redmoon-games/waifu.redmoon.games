@@ -7,7 +7,8 @@
 
         @if (PlayerIsReady)
         {
-            <GameWindow Player="Player"/>
+            <GameWindow Player="Player"
+                        PlayerIsReady ="PlayerIsReady"/>
         }
         else
         {
@@ -21,8 +22,8 @@
 
 <div style="border: 1px, solid, red; margin-top:25px;">
     <h3>Player Info:</h3>
-    <p>Player Name : @Player.ProfileInfo.Name</p>
-    <p>Player Name : @Player.Team.Name</p>
+    <p>Player Name : @Player?.ProfileInfo.Name</p>
+    <p>Player Team Name : @PlayerTeam?.Name</p>
 
     <button @onclick="ResetLocalData">Reset user</button>
 

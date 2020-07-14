@@ -3,7 +3,7 @@
 
 <div class="game">
 
-    @if (Player.Team == null)
+    @if (!PlayerIsReady)
     {
         <p>Сначала вступите в команду!</p>
     }

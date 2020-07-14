@@ -22,7 +22,13 @@ namespace TournamentLibrary.Models
         public void AddPlayer(IPlayer player)
         {
             Players.Add(player);
-            player.ChangeTeam(this);
+            player.PlayerHasBeenUpdated += Player_PlayerHasBeenUpdated;
+            ((Player)player).Upgrades = UpgradesBundle;
+        }
+
+        private void Player_PlayerHasBeenUpdated(object sender, PlayerEventArgs e)
+        {
+            AddScore(e.MoneyToAdd);
         }
 
         public void AddScore(BigNumber score)
