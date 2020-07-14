@@ -29,5 +29,31 @@ namespace TournamentLibrary.Test
 
             Assert.Equal(expected, actual);
         }
+
+        [Fact]
+        public void Tournament_ShouldBeAbleToChangeTeam()
+        {
+            IPlayer player = new RemPlayer("New One");
+            ITeam team = new RemTeam("Mango team");
+            player.ChangeTeam(team);
+
+            ITeam expected = team;
+
+            ITeam actual = player.Team;
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void Tournament_ShouldBeAbleToWorkWithoutTeam()
+        {
+            IPlayer player = new RemPlayer("New One");
+
+            ITeam expected = null;
+
+            ITeam actual = player.Team;
+
+            Assert.Equal(expected, actual);
+        }
     }
 }
