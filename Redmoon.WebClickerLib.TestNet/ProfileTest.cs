@@ -1,7 +1,7 @@
 ﻿using Xunit;
 using Redmoon.WebClickerLib.Models;
 
-namespace Redmoon.WebClickerLib.TestCore
+namespace Redmoon.WebClickerLib.TestNet
 {
     public class ProfileTest
     {

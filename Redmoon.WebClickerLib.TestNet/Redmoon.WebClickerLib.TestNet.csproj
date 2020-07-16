@@ -58,7 +58,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ItemModel.cs" />
+    <Compile Include="BigNumberTest.cs" />
+    <Compile Include="ItemModelTest.cs" />
     <Compile Include="ProfileTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
