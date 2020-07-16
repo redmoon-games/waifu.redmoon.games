@@ -36,7 +36,7 @@ namespace TournamentLibrary.CustomPlayer
 
 
 
-        public RemPlayer(string login) : base(new PlayerProfile(login),
+        public RemPlayer(string login) : base(new Profile(login),
                                               new UpgradeSystem(upgradesPreset),
                                               new PlayerMoney(),
                                               new AchievementSystem(achievements))

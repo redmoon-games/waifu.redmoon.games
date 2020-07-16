@@ -13,10 +13,10 @@ using TournamentLibrary.UpgradeSys;
 
 namespace TournamentLibrary.Models
 {
-    public abstract class Player : IPlayer, IEquatable<Player>
+    public class Player : IPlayer, IEquatable<Player>
     {
         public BigNumber CurrentBalance => _moneySystem.Money;
-        public IPlayerProfile ProfileInfo { get; }
+        public IProfile ProfileInfo { get; }
         public IUpgradeSystem Upgrades { get; internal set; }
         public IAchievementSystem Achievements { get; }
 
@@ -39,8 +39,13 @@ namespace TournamentLibrary.Models
             PlayerHasBeenUpdated?.Invoke(this, playerEventArgs);
         }
 
+        public Player(string name)
+        {
+            ProfileInfo = new Profile(name);
+        }
+
         public Player(
-            IPlayerProfile playeProfile,
+            IProfile playeProfile,
             IUpgradeSystem playerUpgradesBundle,
             IMoneySystem playerMoneySystem,
             IAchievementSystem achievementSystem)

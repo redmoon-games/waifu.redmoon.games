@@ -9,7 +9,7 @@ namespace TournamentLibrary.Models
     {
         IAchievementSystem Achievements { get; }
         BigNumber CurrentBalance { get; }
-        IPlayerProfile ProfileInfo { get; }
+        IProfile ProfileInfo { get; }
         IUpgradeSystem Upgrades { get; }
 
         event EventHandler<PlayerEventArgs> PlayerHasBeenUpdated;

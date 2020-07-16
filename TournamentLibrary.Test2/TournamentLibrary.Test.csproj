@@ -58,7 +58,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BigNumberTest.cs" />
+    <Compile Include="ItemModelTest.cs" />
     <Compile Include="PlayerTests.cs" />
+    <Compile Include="ProfileTest.cs" />
     <Compile Include="TeamTests.cs" />
     <Compile Include="TournamentTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

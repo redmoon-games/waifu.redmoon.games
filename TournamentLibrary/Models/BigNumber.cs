@@ -5,15 +5,23 @@ using System.Text;
 
 namespace TournamentLibrary.Models
 {
-    public struct BigNumber : IEquatable<BigNumber>, IComparable<BigNumber>
+    public struct BigNumber : IComparable<BigNumber>
     {
-        public float Amount { get { return _amount; } }
-        public int Discharge { get {
-                if (Amount < 0.000001)
-                {
-                    _discharge = 0;
-                }
-                return _discharge; } }
+        public float Amount 
+        { 
+            get { return _amount; }
+            set { _amount = value; }
+        }
+        public int Discharge 
+        { 
+            get { return _discharge; }
+            set 
+            {
+                if (_discharge < 0) 
+                    throw new ArgumentOutOfRangeException("Discharge should be greater than 0!");
+                _discharge = value; 
+            }
+        }
 
         public static BigNumber Zero = new BigNumber(0, 0);
         public static BigNumber One = new BigNumber(1, 0);
@@ -22,6 +30,7 @@ namespace TournamentLibrary.Models
         private int _discharge;
         private static Dictionary<int, string> dischargeNames = new Dictionary<int, string>()
         {
+            { 0, ""},
             { 1, "Thousand"},
             { 2, "Million"},
             { 3, "Billion"},
@@ -49,92 +58,234 @@ namespace TournamentLibrary.Models
 
         public BigNumber(float amount, int discharge)
         {
+            if (discharge < 0)
+            {
+                throw new ArgumentOutOfRangeException("Discharge cannot be lower than 0!");
+            }
+            while (Math.Abs(amount) >= 1000)
+            {
+                amount /= 1000f;
+                discharge++;
+            }
+            while (discharge > 1 && amount < 1f)
+            {
+                amount *= 1000f;
+                discharge--;
+            }
             _amount = amount;
             _discharge = discharge;
         }
         public BigNumber(BigNumber score)
         {
+            score = MinifyDischarge(score);
+            _amount = score.Amount;
+            _discharge = score.Discharge;
+        }
+        public BigNumber(int i)
+        {
+            var score = new BigNumber(i, 0);
+            score = MinifyDischarge(score);
+            _amount = score.Amount;
+            _discharge = score.Discharge;
+        }
+        public BigNumber(float f)
+        {
+            var score = new BigNumber(f, 0);
+            score = MinifyDischarge(score);
             _amount = score.Amount;
             _discharge = score.Discharge;
         }
 
         public override string ToString()
         {
-            string beautyAmount = _amount.ToString("N", CultureInfo.InvariantCulture);
-            string dischargeName = DigitToLetter(_discharge);
-            return $"({ beautyAmount } { dischargeName })";
+            return $"({ Amount } { DigitToLetter(Discharge) })";
         }
 
-        public static BigNumber operator +(BigNumber a, BigNumber b)
+        public override bool Equals(object obj)
         {
-            MakeSameDischarge(ref a, ref b);
-            BigNumber newScore = new BigNumber(a.Amount + b.Amount, a.Discharge);
-            return ConverToMaxDischarge(newScore);
-        }
-        public static BigNumber operator -(BigNumber a, BigNumber b)
-        {
-            MakeSameDischarge(ref a, ref b);
-            BigNumber newScore = new BigNumber(a.Amount - b.Amount, a.Discharge);
-            return ConverToMaxDischarge(newScore);
-        }
-        public static BigNumber operator *(BigNumber a, BigNumber b)
-        {
-            MakeSameDischarge(ref a, ref b);
-            BigNumber newScore = new BigNumber(a.Amount * b.Amount, a.Discharge);
-            return ConverToMaxDischarge(newScore);
-        }
-        public static BigNumber operator *(BigNumber a, float b)
-        {
-            BigNumber newScore = new BigNumber(a.Amount * b, a.Discharge);
-            return ConverToMaxDischarge(newScore);
-        }
-        public static BigNumber operator *(BigNumber a, int b)
-        {
-            BigNumber newScore = new BigNumber(a.Amount * b, a.Discharge);
-            return ConverToMaxDischarge(newScore);
-        }
-        public static BigNumber operator /(BigNumber a, float b)
-        {
-            BigNumber newScore = new BigNumber(a.Amount / b, a.Discharge);
-            return ConverToMaxDischarge(newScore);
+            if (obj is BigNumber bigNumber)
+            {
+                return Discharge == bigNumber.Discharge && Amount == bigNumber.Amount;
+            }
+            else if (obj is int i)
+            {
+                var newBigNum = new BigNumber(i);
+                return (newBigNum.Discharge == Discharge && newBigNum.Amount == Amount);
+            }
+            else if (obj is float f)
+            {
+                var newBigNum = new BigNumber(f);
+                return (newBigNum.Discharge == Discharge && newBigNum.Amount == Amount);
+            }
+            return false;
         }
 
+        public static bool operator <=(BigNumber a, BigNumber b)
+        {
+            return a.CompareTo(b) > 0 == false;
+        }
+        public static bool operator >=(BigNumber a, BigNumber b)
+        {
+            return a.CompareTo(b) < 0 == false;
+        }
+        public static bool operator <(BigNumber a, BigNumber b)
+        {
+            return a.CompareTo(b) < 0;
+        }
+        public static bool operator >(BigNumber a, BigNumber b)
+        {
+            return a.CompareTo(b) > 0;
+        }
         public static bool operator ==(BigNumber a, BigNumber b)
         {
             return a.Equals(b);
         }
         public static bool operator !=(BigNumber a, BigNumber b)
         {
-            return !a.Equals(b);
+            return a.Equals(b) == false;
         }
-        public static bool operator >(BigNumber a, BigNumber b)
+        public static BigNumber operator -(BigNumber first)
         {
-            return a.CompareTo(b) > 0;
+            return new BigNumber(first.Amount - 1, first.Discharge);
         }
-        public static bool operator <(BigNumber a, BigNumber b)
+        public static BigNumber operator +(BigNumber first)
         {
-            return a.CompareTo(b) < 0;
+            return new BigNumber(first.Amount + 1, first.Discharge);
+        }
+        public static BigNumber operator +(BigNumber a, BigNumber b)
+        {
+            MakeSameDischarge(ref a, ref b);
+            var x = new BigNumber(a.Amount + b.Amount, a.Discharge);
+            return MinifyDischarge(x);
+        }
+        public static BigNumber operator +(BigNumber a, float b)
+        {
+            var second = new BigNumber(b);
+            MakeSameDischarge(ref a, ref second);
+            var x = new BigNumber(a.Amount + second.Amount, a.Discharge);
+            return MinifyDischarge(x);
+        }
+        public static BigNumber operator +(BigNumber a, int b)
+        {
+            var second = new BigNumber(b);
+            MakeSameDischarge(ref a, ref second);
+            var x = new BigNumber(a.Amount + second.Amount, a.Discharge);
+            return MinifyDischarge(x);
+        }
+        public static BigNumber operator -(BigNumber a, BigNumber b)
+        {
+            MakeSameDischarge(ref a, ref b);
+            var x = new BigNumber(a.Amount - b.Amount, a.Discharge);
+            return MinifyDischarge(x);
+        }
+        public static BigNumber operator -(BigNumber a, float b)
+        {
+            var second = new BigNumber(b);
+            MakeSameDischarge(ref a, ref second);
+            var x = new BigNumber(a.Amount - second.Amount, a.Discharge);
+            return MinifyDischarge(x);
+        }
+        public static BigNumber operator -(BigNumber a, int b)
+        {
+            var second = new BigNumber(b);
+            MakeSameDischarge(ref a, ref second);
+            var x = new BigNumber(a.Amount - second.Amount, a.Discharge);
+            return MinifyDischarge(x);
+        }
+        public static BigNumber operator *(BigNumber a, BigNumber b)
+        {
+            MakeSameDischarge(ref a, ref b);
+            var x = new BigNumber(a.Amount * b.Amount, a.Discharge + a.Discharge);
+            return MinifyDischarge(x);
+        }
+        public static BigNumber operator *(BigNumber a, float b)
+        {
+            var second = new BigNumber(b);
+            MakeSameDischarge(ref a, ref second);
+            var x = new BigNumber(a.Amount * second.Amount, a.Discharge + second.Discharge);
+            return MinifyDischarge(x);
+        }
+        public static BigNumber operator *(BigNumber a, int b)
+        {
+            var second = new BigNumber(b);
+            MakeSameDischarge(ref a, ref second);
+            var x = new BigNumber(a.Amount * second.Amount, a.Discharge + second.Discharge);
+            return MinifyDischarge(x);
+        }
+        public static BigNumber operator /(BigNumber a, BigNumber b)
+        {
+            MakeSameDischarge(ref a, ref b);
+            var x = new BigNumber(a.Amount / b.Amount, a.Discharge - b.Discharge);
+            return MinifyDischarge(x);
+        }
+        public static BigNumber operator /(BigNumber a, float b)
+        {
+            var second = new BigNumber(b);
+            MakeSameDischarge(ref a, ref second);
+            var x = new BigNumber(a.Amount / second.Amount, a.Discharge - second.Discharge);
+            return MinifyDischarge(x);
+        }
+        public static BigNumber operator /(BigNumber a, int b)
+        {
+            var second = new BigNumber(b);
+            MakeSameDischarge(ref a, ref second);
+            var x = new BigNumber(a.Amount / second.Amount, a.Discharge - second.Discharge);
+            return MinifyDischarge(x);
         }
 
-        public static BigNumber ConverToMaxDischarge(BigNumber newScore)
+        public override int GetHashCode()
         {
-            while (Math.Abs(newScore.Amount) >= 1000)
-                newScore = new BigNumber(newScore.Amount / 1000, newScore.Discharge + 1);
+            return Amount.GetHashCode() + Discharge.GetHashCode();
+        }
+        public int CompareTo(BigNumber other)
+        {
+            if (Discharge == other.Discharge)
+            {
+                if (Amount > other.Amount)
+                    return 1;
+                else if (Amount < other.Amount)
+                    return -1;
+                else return 0;
+            }
+            else if (Discharge > other.Discharge)
+                return 1;
+            else
+                return -1;
+        }
+
+
+        public static BigNumber MinifyDischarge(BigNumber newScore)
+        {
+            if (newScore.Discharge >= 0)
+            {
+                while (Math.Abs(newScore.Amount) >= 1000)
+                {
+                    newScore.Amount /= 1000;
+                    newScore.Discharge += 1;
+                }
+                while (Math.Abs(newScore.Amount) < 1 && newScore.Discharge > 0)
+                {
+                    newScore.Amount *= 1000;
+                    newScore.Discharge -= 1;
+                }
+
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException("Discharge cannot be lower than 0!");
+            }
             return newScore;
         }
-        public static BigNumber ConverToMaxDischarge(float score)
+
+        public static implicit operator BigNumber(float f)
         {
-            BigNumber newScore = new BigNumber(score, 0);
-            while (Math.Abs(newScore.Amount) >= 1000)
-                newScore = new BigNumber(newScore.Amount / 1000, newScore.Discharge + 1);
-            return newScore;
+            BigNumber newScore = new BigNumber(f, 0);
+            return MinifyDischarge(newScore);
         }
-        public static BigNumber ConverToMaxDischarge(int score)
+        public static implicit operator BigNumber(int i)
         {
-            BigNumber newScore = new BigNumber(score, 0);
-            while (Math.Abs(newScore.Amount) >= 1000)
-                newScore = new BigNumber(newScore.Amount / 1000, newScore.Discharge + 1);
-            return newScore;
+            BigNumber newScore = new BigNumber(i, 0);
+            return MinifyDischarge(newScore);
         }
 
         private static void MakeSameDischarge(ref BigNumber a, ref BigNumber b)
@@ -158,6 +309,7 @@ namespace TournamentLibrary.Models
             }
             else
                 dischargeNames.TryGetValue(digit, out digitName);
+            if (digitName.Length > 2) return $"{digitName[0]}{digitName[1]}";
             return digitName;
         }
 
@@ -172,24 +324,5 @@ namespace TournamentLibrary.Models
             return new BigNumber() { _amount = newAmount, _discharge = newDigit };
         }
 
-        public bool Equals(BigNumber other)
-        {
-            return Amount != other.Amount || Discharge != other.Discharge;
-        }
-
-        public int CompareTo(BigNumber other)
-        {
-            if (Discharge > other.Discharge ||
-                (Discharge == other.Discharge && Amount > other.Amount))
-            {
-                return 1;
-            }
-            else if (Discharge == other.Discharge && Amount == other.Amount)
-            {
-                return 0;
-            }
-            else
-                return -1;
-        }
     }
 }

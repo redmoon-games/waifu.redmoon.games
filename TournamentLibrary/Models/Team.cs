@@ -35,5 +35,10 @@ namespace TournamentLibrary.Models
         {
             TotalScore += score;
         }
+
+        public List<IPlayer> GetTopPlayers()
+        {
+            return;
+        }
     }
 }

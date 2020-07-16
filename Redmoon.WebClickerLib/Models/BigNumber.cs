@@ -87,6 +87,10 @@ namespace Redmoon.WebClickerLib.Models
             MakeSameDischarge(ref a, ref b);
             return new BigNumber(a.Amount * b.Amount, a.Discharge);
         }
+        public static BigNumber operator *(BigNumber a, float b)
+        {
+            return new BigNumber(a.Amount * b, a.Discharge);
+        }
         public static BigNumber operator /(BigNumber a, BigNumber b)
         {
             MakeSameDischarge(ref a, ref b);

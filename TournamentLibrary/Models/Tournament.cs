@@ -32,5 +32,10 @@ namespace TournamentLibrary.Models
             }
             return topTeam;
         }
+
+        public IDictionary<ITeam, float> GetTournamentStat()
+        {
+            return;
+        }
     }
 }

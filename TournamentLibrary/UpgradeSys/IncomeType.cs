@@ -1,4 +1,4 @@
-﻿namespace TournamentLibrary.Models
+﻿namespace TournamentLibrary.UpgradeSys
 {
     public enum IncomeType
     {
